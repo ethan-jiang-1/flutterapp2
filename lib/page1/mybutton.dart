@@ -6,6 +6,7 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         print('MyButton was tapped!');
+        Navigator.pushNamed(context, "/page2");
       },
       child: Container(
         height: 36.0,
@@ -16,7 +17,7 @@ class MyButton extends StatelessWidget {
           color: Colors.lightGreen[500],
         ),
         child: Center(
-          child: Text('Engage Now'),
+          child: Text('Tap to move to Page2'),
         ),
       ),
     );

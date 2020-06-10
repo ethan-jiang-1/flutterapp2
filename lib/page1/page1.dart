@@ -12,14 +12,6 @@ class MyAppBar extends StatelessWidget {
 
   final Widget title;
 
-  pressMenu() {
-    print("pressMenu");
-  }
-
-  pressSearch() {
-    print("pressSearch");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +25,10 @@ class MyAppBar extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.menu),
             tooltip: 'Navigation menu',
-            onPressed: pressMenu, // null disables the button
+            onPressed: () {
+              print("pressMenu");
+              Navigator.pushNamed(context, '/page2');
+            },
           ),
           // Expanded expands its child to fill the available space.
           Expanded(
@@ -42,7 +37,9 @@ class MyAppBar extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.search),
             tooltip: 'Search',
-            onPressed: pressSearch,
+            onPressed: () {
+              print("pressSearch");
+            }
           ),
         ],
       ),
