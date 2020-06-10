@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp2/page0/page0.dart';
 import 'package:flutterapp2/page1/page1.dart';
 import 'package:flutterapp2/page2/page2.dart';
 
@@ -10,7 +11,8 @@ MyApp() {
     //home: Page1(),
     initialRoute: "/",
     routes: {
-      "/": (context) => Page1(),
+      "/": (context) => Page0(),
+      "/page1": (context) => Page1(),
       "/page2": (context) => Page2(),
     },
   );

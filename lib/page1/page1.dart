@@ -27,7 +27,7 @@ class MyAppBar extends StatelessWidget {
             tooltip: 'Navigation menu',
             onPressed: () {
               print("pressMenu");
-              Navigator.pushNamed(context, '/page2');
+              Navigator.pushNamed(context, '/');
             },
           ),
           // Expanded expands its child to fill the available space.
@@ -57,7 +57,7 @@ class Page1 extends StatelessWidget {
         children: <Widget>[
           MyAppBar(
             title: Text(
-              'Example title X',
+              'Page1: Example title X',
               style: Theme.of(context).primaryTextTheme.headline6,
             ),
           ),
