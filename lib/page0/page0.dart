@@ -78,7 +78,8 @@ class Page0 extends StatelessWidget {
             MyAppBar0(
               title: Text(
                 'Example title X',
-                style: Theme.of(context).primaryTextTheme.headline6,),
+                style: Theme.of(context).primaryTextTheme.headline6,
+              ),
             ),
             Expanded(
               child: Center (

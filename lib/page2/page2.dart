@@ -8,12 +8,21 @@ class Page2 extends StatelessWidget {
         title: Text("Page2: Second Screen"),
       ),
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first screen when tapped.
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
+        child: Column(
+          children:<Widget> [
+            RaisedButton(
+              onPressed: () {
+                // Navigate back to first screen when tapped.
+                Navigator.pop(context);
+              },
+              child: Text('Go back!'),),
+          RaisedButton(
+            onPressed: () {
+              print("do some work");
+            },
+            child: Text('Do some work'),
+              ),
+          ]
         ),
       ),
     );
