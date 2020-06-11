@@ -91,6 +91,11 @@ class Page0 extends StatelessWidget {
                 child: MyButton0('/page2'),
               ),
             ),
+            Expanded(
+              child: Center (
+                child: MyButton0('/page_tab0'),
+              ),
+            ),
           ],
         ),
     );
