@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 
-class MyAppBar0 extends AppBar{
+class MyBar0 extends StatelessWidget{
   //super(key:key);
-  MyAppBar0({this.title});
+  MyBar0(this.title);
 
   // Fields in a Widget subclass are always marked "final".
 
@@ -74,12 +74,15 @@ class Page0 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar0(
+        appBar: AppBar(
           title: Text("Home"),
         ),
         body: Center(
           child: Column(
             children: <Widget>[
+              Center(
+                child: MyBar0(Text("MyBar in Home")),
+              ),
               Expanded(
                 child: Center (
                   child: MyButton0('/page1'),
