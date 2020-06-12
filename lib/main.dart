@@ -3,6 +3,7 @@ import 'package:flutterapp2/page0/page0.dart';
 import 'package:flutterapp2/page1/page1.dart';
 import 'package:flutterapp2/page2/page2.dart';
 import 'package:flutterapp2/page_tab0/page_tab0.dart';
+import 'package:flutterapp2/page_html0/page_html0.dart';
 
 // ignore: non_constant_identifier_names
 MyApp() {
@@ -15,6 +16,7 @@ MyApp() {
       "/page1": (context) => Page1(),
       "/page2": (context) => Page2(),
       "/page_tab0": (context) => PageTab0(),
+      "/page_html0": (context) => WebViewExample(),
     },
   );
 }
