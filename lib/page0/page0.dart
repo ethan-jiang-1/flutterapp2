@@ -1,13 +1,14 @@
 import "package:flutter/material.dart";
 
-class MyAppBar0 extends StatelessWidget {
+class MyAppBar0 extends AppBar{
+  //super(key:key);
   MyAppBar0({this.title});
 
   // Fields in a Widget subclass are always marked "final".
 
   final Widget title;
 
-  @override
+  //@override
   Widget build(BuildContext context) {
     return Container(
       height: 56.0, // in logical pixels
@@ -72,32 +73,31 @@ class MyButton0 extends StatelessWidget {
 class Page0 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: Column(
-          children: <Widget>[
-            MyAppBar0(
-              title: Text(
-                'Example title X',
-                style: Theme.of(context).primaryTextTheme.headline6,
-              ),
-            ),
-            Expanded(
-              child: Center (
-                child: MyButton0('/page1'),
-              ),
-            ),
-            Expanded(
-              child: Center (
-                child: MyButton0('/page2'),
-              ),
-            ),
-            Expanded(
-              child: Center (
-                child: MyButton0('/page_tab0'),
-              ),
-            ),
-          ],
+    return Scaffold(
+        appBar: MyAppBar0(
+          title: Text("Home"),
         ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: Center (
+                  child: MyButton0('/page1'),
+                ),
+              ),
+              Expanded(
+                child: Center (
+                  child: MyButton0('/page2'),
+                ),
+              ),
+              Expanded(
+                child: Center (
+                  child: MyButton0('/page_tab0'),
+                ),
+              ),
+            ],
+        ),
+      ),
     );
   }
 }

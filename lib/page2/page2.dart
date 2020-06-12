@@ -15,13 +15,16 @@ class Page2 extends StatelessWidget {
                 // Navigate back to first screen when tapped.
                 Navigator.pop(context);
               },
-              child: Text('Go back!'),),
-          RaisedButton(
-            onPressed: () {
-              print("do some work");
-            },
-            child: Text('Do some work'),
-              ),
+              child: Text('Go back!'),
+            ),
+            RaisedButton(
+              color: Color.fromARGB(100, 255, 210, 200),
+              textColor: Color.fromARGB(100, 10, 50, 45),
+              onPressed: () {
+                print("do some work");
+              },
+              child: Text('Do some work'),
+            ),
           ]
         ),
       ),
