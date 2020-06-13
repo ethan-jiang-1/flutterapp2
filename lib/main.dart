@@ -8,7 +8,7 @@ import 'package:flutterapp2/page_tab0/page_tab0.dart';
 import 'package:flutterapp2/page_html0/page_html0.dart';
 import 'package:flutterapp2/page_cam0/page_cam0.dart';
 import 'package:flutterapp2/page_bt0/page_bt0.dart';
-
+import 'package:flutterapp2/page_bt1/page_bt1.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,6 +28,7 @@ MyApp() {
       "/page_html0": (context) => WebViewExample(),
       "/page_cam0": (context) => PageCamera0(),
       "/page_bt0": (context) => PageBt0(),
+      "/page_bt1": (context) => FlutterBluePage(),
     },
   );
 }
@@ -50,6 +51,7 @@ class Page0 extends StatelessWidget {
               MyButton0('/page_html0'),
               MyButton0('/page_cam0'),
               MyButton0("/page_bt0"),
+              MyButton0("/page_bt1"),
             ],
         ),
       ),
