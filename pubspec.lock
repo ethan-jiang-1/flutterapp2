@@ -69,6 +69,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_bluetooth_basic:
+    dependency: "direct main"
+    description:
+      name: flutter_bluetooth_basic
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.5"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -86,13 +93,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
-  js:
-    dependency: "direct main"
+  json_annotation:
+    dependency: transitive
     description:
-      name: js
+      name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.2"
+    version: "3.0.1"
   matcher:
     dependency: transitive
     description:
@@ -163,6 +170,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.13"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.23.1"
   sky_engine:
     dependency: transitive
     description: flutter

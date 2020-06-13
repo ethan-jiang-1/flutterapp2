@@ -34,8 +34,7 @@ dependencies:
   camera: ^0.5.8+2
   path_provider:
   video_player:
-
-  js:
+  flutter_bluetooth_basic: ^0.1.5
 
 dev_dependencies:
   flutter_test:
