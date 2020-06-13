@@ -9,6 +9,7 @@ import 'package:flutterapp2/page_html0/page_html0.dart';
 import 'package:flutterapp2/page_cam0/page_cam0.dart';
 import 'package:flutterapp2/page_bt0/page_bt0.dart';
 import 'package:flutterapp2/page_bt1/page_bt1.dart';
+import 'package:flutterapp2/page_ani/page_ani.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,6 +30,7 @@ MyApp() {
       "/page_cam0": (context) => PageCamera0(),
       "/page_bt0": (context) => PageBt0(),
       "/page_bt1": (context) => FlutterBluePage(),
+      "/page_ani0": (context) => PageAni0(),
     },
   );
 }
@@ -45,13 +47,14 @@ class Page0 extends StatelessWidget {
           child: Column(
             children: <Widget>[
               MyBar0(Text("MyBar in Home")),
-              MyButton0('/page1'),
-              MyButton0('/page2'),
-              MyButton0('/page_tab0'),
-              MyButton0('/page_html0'),
-              MyButton0('/page_cam0'),
-              MyButton0("/page_bt0"),
-              MyButton0("/page_bt1"),
+              MyButton0('/page1', Colors.lightGreen[500]),
+              MyButton0('/page2', Colors.lightGreen[500],),
+              MyButton0('/page_tab0', Colors.lightGreen[300]),
+              MyButton0('/page_html0', Colors.lightGreen[300]),
+              MyButton0('/page_cam0', Colors.lightBlue[200]),
+              MyButton0("/page_bt0", Colors.lightBlue[300]),
+              MyButton0("/page_bt1", Colors.lightBlue[300]),
+              MyButton0("/page_ani0",Colors.yellow[200])
             ],
         ),
       ),
@@ -103,8 +106,9 @@ class MyBar0 extends StatelessWidget{
 }
 class MyButton0 extends StatelessWidget {
   final String _name;
+  final Color _color;
 
-  MyButton0(this._name);
+  MyButton0(this._name, this._color);
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +122,8 @@ class MyButton0 extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
-          color: Colors.lightGreen[500],
+          borderRadius: BorderRadius.circular(20.0),
+          color: _color,
         ),
         child: Center(
           child: Text('Jump to $_name'),
