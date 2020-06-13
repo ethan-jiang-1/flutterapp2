@@ -1,21 +1,31 @@
-import 'dart:convert';
-// import 'dart:typed_data';
+//import 'dart:convert';
+//import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 //import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
 
+
 class PageBt0 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: "none");
-/*     return MaterialApp(
+    return MaterialApp(
+      title: 'Bluetooth scanner',
+    );
+  }
+}
+
+/*
+class PageBt0 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       title: 'Bluetooth scanner',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Bluetooth Scanner'),
     );
- */  }
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -199,3 +209,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+*/
