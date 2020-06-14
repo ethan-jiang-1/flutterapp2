@@ -13,8 +13,8 @@ import 'package:flutterapp2/page_bt1/page_bt1.dart';
 import 'package:flutterapp2/page_ani/page_ani.dart';
 
 void main() {
-  var _os_name = Platform.operatingSystem;
-  print("main started $_os_name ....");
+  final _osName = Platform.operatingSystem;
+  print("main started $_osName ....");
   runApp(MyMainPage());
   print("main ended");
 }
