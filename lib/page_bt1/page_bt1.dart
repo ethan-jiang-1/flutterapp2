@@ -15,12 +15,12 @@ class FlutterBluePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       color: Colors.lightBlue,
-      home: BluetoothBuilder(),
+      home: bluetoothBuilder(),
     );
   }
 }
 
-dynamic BluetoothBuilder()  {
+dynamic bluetoothBuilder()  {
   try {
     return StreamBuilder<BluetoothState>(
       stream: FlutterBlue.instance.state,
