@@ -31,72 +31,72 @@ class _PageAni0State extends State<PageAni0> {
   
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Bluetooth scanner',
-      home: Scaffold(
+    return Scaffold(
+        appBar: AppBar( 
+          title: Text("Page Animation"),
+        ),        
         body: Center(
-          child: Column(
-            children: <Widget>[
-              //Expanded (
-              //  flex:1, 
-              //  child: Text(""),
-              //),
-              //RaisedButton(
-              //  onPressed: () => _updateState(),
-              //  child: Text("Run Animation"),
-              //),
-            Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.arrow_forward),
-                    tooltip: 'Increase volume by 10',
-                    onPressed: () => _updateState(),
-                  ),
-                  Text('Trigger Annimation')
-                ],
-              ),              
-              AnimatedContainer(
-                duration: Duration(milliseconds: 400),
-                curve: Curves.bounceOut,
+        child: Column(
+          children: <Widget>[
+            //Expanded (
+            //  flex:1, 
+            //  child: Text(""),
+            //),
+            //RaisedButton(
+            //  onPressed: () => _updateState(),
+            //  child: Text("Run Animation"),
+            //),
+          Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.arrow_forward),
+                  tooltip: 'Increase volume by 10',
+                  onPressed: () => _updateState(),
+                ),
+                Text('Trigger Annimation')
+              ],
+            ),              
+            AnimatedContainer(
+              duration: Duration(milliseconds: 400),
+              curve: Curves.bounceOut,
+              width: _width,
+              height: _height,
+              color: Colors.lightBlue[200],
+              child: Center(
+                child: Text(
+                  "Animation0",
+                  style: Theme.of(context).textTheme.headline5,
+                )
+              ),
+            ),
+            Expanded(
+              flex: 1, 
+              child: Text(""),
+            ),
+            TweenAnimationBuilder(
+              tween: _scaleTween,
+              duration: Duration(milliseconds: 400),
+              builder: (context, scale, child) {
+                return Transform.scale(scale:scale, child: child);
+              },
+              child: Container(
                 width: _width,
                 height: _height,
-                color: Colors.lightBlue[200],
-                child: Center(
-                  child: Text(
-                    "Animation0",
-                    style: Theme.of(context).textTheme.headline5,
+                color: Colors.lightGreen[200],
+                child: Center (
+                  //child: Text(
+                  //  "Animation1",
+                  //  style: Theme.of(context).textTheme.headline6,
+                  //)
+                  child: Image( 
+                    image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
                   )
-                ),
+                )
               ),
-              Expanded(
-                flex: 1, 
-                child: Text(""),
-              ),
-              TweenAnimationBuilder(
-                tween: _scaleTween,
-                duration: Duration(milliseconds: 400),
-                builder: (context, scale, child) {
-                  return Transform.scale(scale:scale, child: child);
-                },
-                child: Container(
-                  width: _width,
-                  height: _height,
-                  color: Colors.lightGreen[200],
-                  child: Center (
-                    //child: Text(
-                    //  "Animation1",
-                    //  style: Theme.of(context).textTheme.headline6,
-                    //)
-                    child: Image( 
-                      image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
-                    )
-                  )
-                ),
-              ),
-            ]
-          )
-        ),
+            ),
+          ]
+        )
       ),
     );
   }

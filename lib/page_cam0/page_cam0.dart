@@ -73,7 +73,19 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Camera example'),
+        title: GestureDetector( 
+          onTap: () {
+            print("Tap on tab");
+            Navigator.pop(context);
+            Navigator.pushNamedAndRemoveUntil(context, "/", ModalRoute.withName("/"));
+            //Navigator.pushNamed(context,"/");
+            //Navigator.pop(context);
+          },
+          child: Container(
+            child:Center(
+              child:Text('Camera Page'),)
+          )
+        ),
       ),
       body: Column(
         children: <Widget>[

@@ -15,17 +15,25 @@ class FlutterBluePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       color: Colors.lightBlue,
-      home: StreamBuilder<BluetoothState>(
-          stream: FlutterBlue.instance.state,
-          initialData: BluetoothState.unknown,
-          builder: (c, snapshot) {
-            final state = snapshot.data;
-            if (state == BluetoothState.on) {
-              return FindDevicesScreen();
-            }
-            return BluetoothOffScreen(state: state);
-          }),
+      home: BluetoothBuilder(),
     );
+  }
+}
+
+dynamic BluetoothBuilder()  {
+  try {
+    return StreamBuilder<BluetoothState>(
+      stream: FlutterBlue.instance.state,
+      initialData: BluetoothState.unknown,
+      builder: (c, snapshot) {
+        final state = snapshot.data;
+        if (state == BluetoothState.on) {
+          return FindDevicesScreen();
+        }
+        return BluetoothOffScreen(state: state);
+      });
+  } catch(e) {
+    return Text("Exception: $e");
   }
 }
 

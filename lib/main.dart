@@ -1,5 +1,6 @@
 //import 'dart:js';
 //import 'dart:js';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/page1/page1.dart';
@@ -12,13 +13,17 @@ import 'package:flutterapp2/page_bt1/page_bt1.dart';
 import 'package:flutterapp2/page_ani/page_ani.dart';
 
 void main() {
-  runApp(MyApp());
+  var _os_name = Platform.operatingSystem;
+  print("main started $_os_name ....");
+  runApp(MyMainPage());
+  print("main ended");
 }
 
 // ignore: non_constant_identifier_names
-MyApp() {
+MyMainPage() {
+  print("MyMainPage Called...");
   return MaterialApp(
-    title: 'My app (invisible)', // used by the OS task switcher
+    title: 'My App (invisible)', // used by the OS task switcher
     //home: Page1(),
     initialRoute: "/",
     routes: {
@@ -41,7 +46,7 @@ class Page0 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Home"),
+          title: Text("MyMainPage： Home"),
         ),
         body: Center(
           child: Column(
