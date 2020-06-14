@@ -2,7 +2,6 @@
 //import 'dart:js';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 
 class PageAni0 extends StatefulWidget {
@@ -42,10 +41,21 @@ class _PageAni0State extends State<PageAni0> {
               //  flex:1, 
               //  child: Text(""),
               //),
-              RaisedButton(
-                onPressed: () => _updateState(),
-                child: Text("Run Animation"),
-              ),
+              //RaisedButton(
+              //  onPressed: () => _updateState(),
+              //  child: Text("Run Animation"),
+              //),
+            Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.arrow_forward),
+                    tooltip: 'Increase volume by 10',
+                    onPressed: () => _updateState(),
+                  ),
+                  Text('Trigger Annimation')
+                ],
+              ),              
               AnimatedContainer(
                 duration: Duration(milliseconds: 400),
                 curve: Curves.bounceOut,
@@ -74,9 +84,12 @@ class _PageAni0State extends State<PageAni0> {
                   height: _height,
                   color: Colors.lightGreen[200],
                   child: Center (
-                    child: Text(
-                      "Animation1",
-                      style: Theme.of(context).textTheme.headline6,
+                    //child: Text(
+                    //  "Animation1",
+                    //  style: Theme.of(context).textTheme.headline6,
+                    //)
+                    child: Image( 
+                      image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
                     )
                   )
                 ),
