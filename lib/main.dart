@@ -15,19 +15,18 @@ import 'package:flutterapp2/page_ani/page_ani.dart';
 void main() {
   final _osName = Platform.operatingSystem;
   print("main started $_osName ....");
-  runApp(MyMainPage());
+  runApp(MyApp());
   print("main ended");
 }
 
 // ignore: non_constant_identifier_names
-MyMainPage() {
-  print("MyMainPage Called...");
+MyApp() {
+  print("MyApp Called...");
   return MaterialApp(
-    title: 'My App (invisible)', // used by the OS task switcher
-    //home: Page1(),
+    title: 'MyApp (invisible)', // used by the OS task switcher
     initialRoute: "/",
     routes: {
-      "/": (context) => Page0(),
+      "/": (context) => HomePage(),
       "/page1": (context) => Page1(),
       "/page2": (context) => Page2(),
       "/page_tab0": (context) => PageTab0(),
@@ -41,79 +40,59 @@ MyMainPage() {
 }
 
 
-class Page0 extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("MyMainPage： Home"),
+          title: Text("HomePage： Home"),
+          backgroundColor: Colors.blue,
         ),
         body: Center(
           child: Column(
             children: <Widget>[
-              MyBar0(Text("MyBar in Home")),
-              MyButton0('/page1', Colors.lightGreen[500]),
-              MyButton0('/page2', Colors.lightGreen[500],),
-              MyButton0('/page_tab0', Colors.lightGreen[300]),
-              MyButton0('/page_html0', Colors.lightGreen[300]),
-              MyButton0('/page_cam0', Colors.lightBlue[200]),
-              MyButton0("/page_bt0", Colors.lightBlue[300]),
-              MyButton0("/page_bt1", Colors.lightBlue[300]),
-              MyButton0("/page_ani0",Colors.yellow[200])
+              MyJumpButton('/page1', Colors.lightGreen[500]),
+              MyJumpButton('/page2', Colors.lightGreen[500],),
+              MyJumpButton('/page_tab0', Colors.lightGreen[300]),
+              MyJumpButton('/page_html0', Colors.lightGreen[300]),
+              MyJumpButton('/page_cam0', Colors.lightBlue[200]),
+              MyJumpButton("/page_bt0", Colors.lightBlue[300]),
+              MyJumpButton("/page_bt1", Colors.lightBlue[300]),
+              MyJumpButton("/page_ani0",Colors.yellow[200])
             ],
+          ),
         ),
-      ),
+        drawer: MyHomeDrawer(),
     );
   }
 }
 
-class MyBar0 extends StatelessWidget{
-  //super(key:key);
-  MyBar0(this.title);
-
-  // Fields in a Widget subclass are always marked "final".
-
-  final Widget title;
-
-  //@override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 56.0, // in logical pixels
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      decoration: BoxDecoration(color: Colors.blue[500]),
-      // Row is a horizontal, linear layout.
-      child: Row(
-        // <Widget> is the type of items in the list.
-        children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.menu),
-            tooltip: 'Navigation menu',
-            onPressed: () {
-              print("pressMenu");
-              Navigator.pushNamed(context, '/page2');
-            },
+Widget MyHomeDrawer() {
+  return Drawer(
+    child: ListView(
+      children: <Widget>[
+        DrawerHeader(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: <Color>[
+              Colors.lightBlue[100],
+              Colors.lightBlue[500]
+            ])
           ),
-          // Expanded expands its child to fill the available space.
-          Expanded(
-            child: title,
-          ),
-          IconButton(
-              icon: Icon(Icons.search),
-              tooltip: 'Search',
-              onPressed: () {
-                print("pressSearch");
-              }
-          ),
-        ],
-      ),
-    );
-  }
+          child: Text("")),
+        ListTile(title: Text("line1")),
+        ListTile(title: Text("line2")),
+        ListTile(title: Text("line3")),
+        ListTile(title: Text("line4")),
+      ],
+    )
+  );
 }
-class MyButton0 extends StatelessWidget {
+
+class MyJumpButton extends StatelessWidget {
   final String _name;
   final Color _color;
 
-  MyButton0(this._name, this._color);
+  MyJumpButton(this._name, this._color);
 
   @override
   Widget build(BuildContext context) {
