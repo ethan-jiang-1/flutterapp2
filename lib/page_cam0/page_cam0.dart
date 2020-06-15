@@ -30,8 +30,28 @@ IconData getCameraLensIcon(CameraLensDirection direction) {
 void logError(String code, String message) =>
     print('Error: $code\nError Message: $message');
 
-class _CameraExampleHomeState extends State<CameraExampleHome>
-    with WidgetsBindingObserver {
+List<CameraDescription> cameras = [];
+
+void initCamera() async {
+    try {
+      WidgetsFlutterBinding.ensureInitialized();
+      cameras = await availableCameras();
+    } on CameraException catch (e) {
+      logError(e.code, e.description);
+    }    
+}
+
+class CameraExampleHome extends StatefulWidget {
+  @override
+  _CameraExampleHomeState createState() {
+    initCamera();
+    return _CameraExampleHomeState();
+  }
+}
+
+
+
+class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindingObserver {
   CameraController controller;
   String imagePath;
   String videoPath;
@@ -76,14 +96,12 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
         title: GestureDetector( 
           onTap: () {
             print("Tap on tab");
-            Navigator.pop(context);
-            Navigator.pushNamedAndRemoveUntil(context, "/", ModalRoute.withName("/"));
-            //Navigator.pushNamed(context,"/");
-            //Navigator.pop(context);
+            setState(() => {});
           },
           child: Container(
             child:Center(
-              child:Text('Camera Page'),)
+              child: Text((cameras.length == 0) ? 'Camera Not Found (tap to find)': 'Camera Found')
+            )
           )
         ),
       ),
@@ -128,8 +146,8 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
   /// Display the preview from the camera (or a message if the preview is not available).
   Widget _cameraPreviewWidget() {
     if (controller == null || !controller.value.isInitialized) {
-      return const Text(
-        'Tap a camera',
+      return Text(
+        (cameras.length == 0)? 'No camera found': 'select a camera below',
         style: TextStyle(
           color: Colors.white,
           fontSize: 24.0,
@@ -150,15 +168,21 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
       padding: const EdgeInsets.only(left: 25),
       child: Row(
         children: <Widget>[
-          const Text('Enable Audio:'),
-          Switch(
-            value: enableAudio,
-            onChanged: (bool value) {
-              enableAudio = value;
-              if (controller != null) {
-                onNewCameraSelected(controller.description);
-              }
-            },
+          Visibility (
+            visible: (cameras.length == 0)? false: true,
+            child:Text('Enable Audio:'),
+          ),
+          Visibility(
+            visible: (cameras.length == 0)? false: true,
+            child:  Switch(
+              value: enableAudio,
+              onChanged: (bool value) {
+                enableAudio = value;
+                if (controller != null) {
+                  onNewCameraSelected(controller.description);
+                }
+              },
+            )
           ),
         ],
       ),
@@ -254,7 +278,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     final List<Widget> toggles = <Widget>[];
 
     if (cameras.isEmpty) {
-      return const Text('No camera found');
+      return const Text('No camera found, Tap title bar to refresh');
     } else {
       for (CameraDescription cameraDescription in cameras) {
         toggles.add(
@@ -472,28 +496,10 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
   }
 }
 
-class CameraExampleHome extends StatefulWidget {
-  @override
-  _CameraExampleHomeState createState() {
-    return _CameraExampleHomeState();
-  }
-}
-
-List<CameraDescription> cameras = [];
-
-void initCamera() async {
-      try {
-      WidgetsFlutterBinding.ensureInitialized();
-      cameras = await availableCameras();
-    } on CameraException catch (e) {
-      logError(e.code, e.description);
-    }    
-}
 
 class PageCamera0 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    initCamera();
     return MaterialApp(
       home: CameraExampleHome(),
     );
