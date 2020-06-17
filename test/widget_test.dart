@@ -12,6 +12,7 @@ import 'package:flutterapp2/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    print("smoke test");
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
 
