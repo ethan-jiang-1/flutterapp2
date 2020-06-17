@@ -3,6 +3,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutterapp2/dagger/counter_change_notifier.dart';
+import 'package:flutterapp2/dagger/injection.iconfig.dart';
 import 'package:flutterapp2/page1/page1.dart';
 import 'package:flutterapp2/page2/page2.dart';
 import 'package:flutterapp2/page_tab0/page_tab0.dart';
@@ -11,10 +13,16 @@ import 'package:flutterapp2/page_cam0/page_cam0.dart';
 import 'package:flutterapp2/page_bt0/page_bt0.dart';
 import 'package:flutterapp2/page_bt1/page_bt1.dart';
 import 'package:flutterapp2/page_ani/page_ani.dart';
+import 'package:provider/provider.dart';
+
+import 'dagger/injection.dart';
 
 void main() {
   final _osName = Platform.operatingSystem;
   print("main started $_osName ....");
+  
+  //configureInjection(Env.prod);
+
   runApp(MyApp());
   print("main ended");
 }
@@ -22,7 +30,8 @@ void main() {
 // ignore: non_constant_identifier_names
 MyApp() {
   print("MyApp Called...");
-  return MaterialApp(
+
+  MaterialApp(
     title: 'MyApp (invisible)', // used by the OS task switcher
     initialRoute: "/",
     routes: {
@@ -36,6 +45,10 @@ MyApp() {
       "/page_bt1": (context) => FlutterBluePage(),
       "/page_ani0": (context) => PageAni0(),
     },
+    //home: ChangeNotifierProvider(
+    //    create: (_) => getIt<CounterChangeNotifier>(),
+    //    child: null,
+    //),
   );
 }
 

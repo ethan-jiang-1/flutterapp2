@@ -36,10 +36,20 @@ dependencies:
   video_player:
   # flutter_bluetooth_basic: ^0.1.5
   flutter_blue: ^0.7.2
+
+  #dagger
+  provider: ^4.0.2
+  injectable: ^0.1.0
+  get_it: ^3.1.0
+
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  #dagger
+  build_runner:
+  injectable_generator: ^0.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
