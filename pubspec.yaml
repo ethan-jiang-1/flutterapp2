@@ -36,7 +36,8 @@ dependencies:
   video_player:
   # flutter_bluetooth_basic: ^0.1.5
   flutter_blue: ^0.7.2
-  
+  flurry: 0.0.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

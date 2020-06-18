@@ -1,8 +1,10 @@
 //import 'dart:js';
 //import 'dart:js';
 import 'dart:io';
-
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flurry/flurry.dart';
+
 import 'package:flutterapp2/page1/page1.dart';
 import 'package:flutterapp2/page2/page2.dart';
 import 'package:flutterapp2/page_tab0/page_tab0.dart';
@@ -19,24 +21,47 @@ void main() {
   print("main ended");
 }
 
-// ignore: non_constant_identifier_names
-MyApp() {
-  print("MyApp Called...");
-  return MaterialApp(
-    title: 'MyApp (invisible)', // used by the OS task switcher
-    initialRoute: "/",
-    routes: {
-      "/": (context) => HomePage(),
-      "/page1": (context) => Page1(),
-      "/page2": (context) => Page2(),
-      "/page_tab0": (context) => PageTab0(),
-      "/page_html0": (context) => WebViewExample(),
-      "/page_cam0": (context) => PageCamera0(),
-      "/page_bt0": (context) => PageBt0(),
-      "/page_bt1": (context) => FlutterBluePage(),
-      "/page_ani0": (context) => PageAni0(),
-    },
-  );
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initPlatformState() async {
+    await Flurry.initialize(
+        androidKey: "8BSVB95GJPBNYG23YT6M",
+        iosKey: "2WNFQP3FFMRWFVFXCDNB",
+        enableLog: true);
+    await Flurry.setUserId("userId");
+    await Flurry.logEvent("eventName");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print("MyApp Called...");
+    return MaterialApp(
+      title: 'MyApp (invisible)', // used by the OS task switcher
+      initialRoute: "/",
+      routes: {
+        "/": (context) => HomePage(),
+        "/page1": (context) => Page1(),
+        "/page2": (context) => Page2(),
+        "/page_tab0": (context) => PageTab0(),
+        "/page_html0": (context) => WebViewExample(),
+        "/page_cam0": (context) => PageCamera0(),
+        "/page_bt0": (context) => PageBt0(),
+        "/page_bt1": (context) => FlutterBluePage(),
+        "/page_ani0": (context) => PageAni0(),
+      },
+    );
+  }
 }
 
 
