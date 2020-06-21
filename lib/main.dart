@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flurry/flurry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterapp2/page1/page1.dart';
 import 'package:flutterapp2/page2/page2.dart';
 import 'package:flutterapp2/page_ani/page_ani.dart';
@@ -13,13 +14,22 @@ import 'package:flutterapp2/page_bt1/page_bt1.dart';
 import 'package:flutterapp2/page_cam0/page_cam0.dart';
 import 'package:flutterapp2/page_html0/page_html0.dart';
 import 'package:flutterapp2/page_tab0/page_tab0.dart';
+import 'package:flutterapp2/weather/bloc/weather_bloc.dart';
+//import 'package:flutterapp2/weather/page_weather_detail.dart';
+import 'package:flutterapp2/weather/page_weather_search.dart';
+import 'package:flutterapp2/weather/weather_repository.dart';
 
 import 'coffee/coffee_app.dart';
 
 void main() {
   final _osName = Platform.operatingSystem;
   print("main started $_osName ....");
-  runApp(MyApp());
+  runApp(
+      BlocProvider(
+        create: (context) => WeatherBloc(FakeWatherRepository()),
+        child: MyApp(),
+      )
+  );
   print("main ended");
 }
 
@@ -51,7 +61,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'MyApp (invisible)', // used by the OS task switcher
       routes: {
-        MyRoutes.home: (context) => HomePage(),
+        MyRoutes.home: (context) => MyHomePage(),
         MyRoutes.page1: (context) => Page1(),
         MyRoutes.page2: (context) => Page2(),
         MyRoutes.pageTab0: (context) => PageTab0(),
@@ -61,6 +71,8 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.pageBt1: (context) => FlutterBluePage(),
         MyRoutes.pageAni0: (context) => PageAni0(),
         MyRoutes.coffee: (context) => CoffeeApp(),
+        MyRoutes.ws1: (context) => WeatherSearchPage(),
+        //MyRoutes.ws2: (context) => WeatherDetailPage(),
       },
     );
   }
@@ -77,15 +89,17 @@ class MyRoutes {
   static final String pageBt1 = "/bt1";
   static final String pageAni0 = "/ani0";
   static final String coffee = "/coffee";
+  static final String ws1 = "/ws1";
+  static final String ws2 = "/ws2";
 }
 
-class HomePage extends StatelessWidget {
+class MyHomePage extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("HomePage： Home"),
+          title: Text("MyHomePage： Home"),
           backgroundColor: Colors.blue,
         ),
         body: Center(
@@ -106,33 +120,39 @@ class HomePage extends StatelessWidget {
                     MyJumpButton("Bluetooth1", MyRoutes.pageBt1, Colors.lightBlue[300]),
                     MyJumpButton("Animation0", MyRoutes.pageAni0, Colors.yellow[200]),
                     MyJumpButton("Coffee", MyRoutes.coffee, Colors.red[200]),
+                    MyJumpButton("Weather Search", MyRoutes.ws1, Colors.red[200]),
                   ],
                 )
               )
             )
           ),
-        drawer: MyHomeDrawer(),
+        drawer: MyDrawer(),
     );
   }
 }
 
-Widget MyHomeDrawer() {
-  return Drawer(
-      child: ListView(
-    children: <Widget>[
-      DrawerHeader(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: <Color>[
-            Colors.lightBlue[100],
-            Colors.lightBlue[500]
-          ])),
-          child: Text("")),
-      ListTile(title: Text("line1")),
-      ListTile(title: Text("line2")),
-      ListTile(title: Text("line3")),
-      ListTile(title: Text("line4")),
-    ],
-  ));
+class MyDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+        child: ListView(
+      children: <Widget>[
+        DrawerHeader(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: <Color>[
+              Colors.lightBlue[100],
+              Colors.lightBlue[500]
+            ])),
+            child: Text("")),
+        ListTile(title: Text("Camera"), 
+                onTap: () {Navigator.pushNamed(context, MyRoutes.pageCam0);}),
+        ListTile(title: Text("Bluetooth"),
+                onTap:  () {Navigator.pushNamed(context, MyRoutes.pageBt1);}),
+        ListTile(title: Text("line3")),
+        ListTile(title: Text("line4")),
+      ],
+    ));
+  }
 }
 
 class MyJumpButton extends StatelessWidget {

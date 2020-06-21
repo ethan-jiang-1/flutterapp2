@@ -40,6 +40,10 @@ dependencies:
   get_it: ^4.0.2
   async: ^2.4.1
 
+  flutter_bloc: 4.0.0  
+  equatable:  1.2.0
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
