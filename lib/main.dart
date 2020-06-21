@@ -78,7 +78,7 @@ class MyRoutes {
   static final String pageBt0 = "/bt0";
   static final String pageBt1 = "/bt1";
   static final String pageAni0 = "/ani0";
-  static final String coffee = "/coffee"
+  static final String coffee = "/coffee";
 }
 
 class HomePage extends StatelessWidget {
