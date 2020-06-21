@@ -32,4 +32,16 @@ class CounterBloc {
     _counterEventController.close();
     _counterStateController.close();
   }
+
+  //CounterBloc
 }
+
+CounterBloc _scb;
+CounterBloc getSingleCounterBloc()
+{
+  if (_scb == null)
+    _scb = CounterBloc();
+  return _scb;
+}
+
+

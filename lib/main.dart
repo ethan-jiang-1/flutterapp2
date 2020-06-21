@@ -53,6 +53,7 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.home: (context) => HomePage(),
         MyRoutes.page1: (context) => Page1(),
         MyRoutes.page2: (context) => Page2(),
+        MyRoutes.page2X: (context) => Page2X(),
         MyRoutes.pageTab0: (context) => PageTab0(),
         MyRoutes.pageHtml0: (context) => WebViewExample(),
         MyRoutes.pageCam0: (context) => PageCamera0(),
@@ -68,6 +69,7 @@ class MyRoutes {
   static final String home = "/";
   static final String page1 = "/page1";
   static final String page2 = "/page2";
+  static final String page2X = "/page2X";
   static final String pageTab0 = "/tab0";
   static final String pageHtml0 = "/html0";
   static final String pageCam0 = "/cam0";

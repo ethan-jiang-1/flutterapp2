@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutterapp2/main.dart';
 import 'package:flutterapp2/page2/counter_event.dart';
 
 import 'count_bloc.dart';
@@ -9,7 +10,7 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> {
-  final _bloc = CounterBloc();
+  final _bloc = getSingleCounterBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,11 @@ class _Page2State extends State<Page2> {
                 Text(
                   '${snapshot.data}',
                   style: Theme.of(context).textTheme.headline4,
+                ),
+                RaisedButton(
+                  onPressed: () => Navigator.pushNamed(context, MyRoutes.page2X),
+                  child: Text("Go to Page2X")
+
                 ),
               ],
             );
@@ -81,7 +87,69 @@ class _Page2State extends State<Page2> {
   @override
   void dispose() {
     super.dispose();
-    _bloc.dispose();
+    //_bloc.dispose();
+  }
+}
+
+
+class Page2X extends StatefulWidget {
+  Page2X({Key key}) : super(key: key);
+
+  @override
+  _Page2XState createState() => _Page2XState();
+}
+
+class _Page2XState extends State<Page2X> {
+  final _bloc = getSingleCounterBloc();
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: <Widget>[
+            Text("Page2X"),
+            Expanded(
+              child: StreamBuilder(
+                stream: _bloc.counter,
+                builder: (contxt, snapshot) {
+                  return Text("     ${snapshot.data}");
+                }
+              )
+            ),
+          ]
+        )
+      ),
+      body: Center(
+      child: StreamBuilder(
+        stream: _bloc.counter,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '${snapshot.data}',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              RaisedButton(
+                onPressed: () => Navigator.pushNamed(context, MyRoutes.page2),
+                child: Text("Go to Page2")
+
+              ),
+            ],
+          );
+        }
+      ),
+    ),
+   );
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    //_bloc.dispose();
+  }
 }
