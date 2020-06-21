@@ -48,24 +48,36 @@ class _MyAppState extends State<MyApp> {
     print("MyApp Called...");
     return MaterialApp(
       title: 'MyApp (invisible)', // used by the OS task switcher
-      initialRoute: "/",
+      initialRoute: MyRoutes.home,
       routes: {
-        "/": (context) => HomePage(),
-        "/page1": (context) => Page1(),
-        "/page2": (context) => Page2(),
-        "/page_tab0": (context) => PageTab0(),
-        "/page_html0": (context) => WebViewExample(),
-        "/page_cam0": (context) => PageCamera0(),
-        "/page_bt0": (context) => PageBt0(),
-        "/page_bt1": (context) => FlutterBluePage(),
-        "/page_ani0": (context) => PageAni0(),
+        MyRoutes.home: (context) => HomePage(),
+        MyRoutes.page1: (context) => Page1(),
+        MyRoutes.page2: (context) => Page2(),
+        MyRoutes.pageTab0: (context) => PageTab0(),
+        MyRoutes.pageHtml0: (context) => WebViewExample(),
+        MyRoutes.pageCam0: (context) => PageCamera0(),
+        MyRoutes.pageBt0: (context) => PageBt0(),
+        MyRoutes.pageBt1: (context) => FlutterBluePage(),
+        MyRoutes.pageAni0: (context) => PageAni0(),
       },
     );
   }
 }
 
+class MyRoutes {
+  static final String home = "/";
+  static final String page1 = "/page1";
+  static final String page2 = "/page2";
+  static final String pageTab0 = "/tab0";
+  static final String pageHtml0 = "/html0";
+  static final String pageCam0 = "/cam0";
+  static final String pageBt0 = "/bt0";
+  static final String pageBt1 = "/bt1";
+  static final String pageAni0 = "/ani0";
+}
 
 class HomePage extends StatelessWidget {
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,19 +86,27 @@ class HomePage extends StatelessWidget {
           backgroundColor: Colors.blue,
         ),
         body: Center(
-          child: Column(
-            children: <Widget>[
-              MyJumpButton('/page1', Colors.lightGreen[500]),
-              MyJumpButton('/page2', Colors.lightGreen[500],),
-              MyJumpButton('/page_tab0', Colors.lightGreen[300]),
-              MyJumpButton('/page_html0', Colors.lightGreen[300]),
-              MyJumpButton('/page_cam0', Colors.lightBlue[200]),
-              MyJumpButton("/page_bt0", Colors.lightBlue[300]),
-              MyJumpButton("/page_bt1", Colors.lightBlue[300]),
-              MyJumpButton("/page_ani0",Colors.yellow[200])
-            ],
+            child: Scrollbar(
+              isAlwaysShown: true,
+              controller: _scrollController,
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Column (
+                  children: <Widget> [
+                    SizedBox(height: 10,),
+                    MyJumpButton("Page1", MyRoutes.page1, Colors.lightGreen[500]),
+                    MyJumpButton("Page2", MyRoutes.page2, Colors.lightGreen[500],),
+                    MyJumpButton("Tab0", MyRoutes.pageTab0, Colors.lightGreen[300]),
+                    MyJumpButton("Html0",MyRoutes.pageHtml0, Colors.lightGreen[300]),
+                    MyJumpButton("Camera0", MyRoutes.pageCam0, Colors.lightBlue[200]),
+                    MyJumpButton("Bluetooth0", MyRoutes.pageBt0, Colors.lightBlue[300]),
+                    MyJumpButton("Bluetooth1", MyRoutes.pageBt1, Colors.lightBlue[300]),
+                    MyJumpButton("Animation0", MyRoutes.pageAni0, Colors.yellow[200])
+                  ],
+                )
+              )
+            )
           ),
-        ),
         drawer: MyHomeDrawer(),
     );
   }
@@ -116,15 +136,16 @@ Widget MyHomeDrawer() {
 class MyJumpButton extends StatelessWidget {
   final String _name;
   final Color _color;
+  final String _route;
 
-  MyJumpButton(this._name, this._color);
+  MyJumpButton(this._name, this._route,  this._color);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         print('MyButton was tapped! {$_name)');
-        Navigator.pushNamed(context, _name);
+        Navigator.pushNamed(context, _route);
       },
       child: Container(
         height: 36.0,
