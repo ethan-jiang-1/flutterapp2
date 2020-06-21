@@ -1,18 +1,20 @@
 //import 'dart:js';
 //import 'dart:js';
-import 'dart:io';
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flurry/flurry.dart';
+import 'dart:io';
 
+import 'package:flurry/flurry.dart';
+import 'package:flutter/material.dart';
 import 'package:flutterapp2/page1/page1.dart';
 import 'package:flutterapp2/page2/page2.dart';
-import 'package:flutterapp2/page_tab0/page_tab0.dart';
-import 'package:flutterapp2/page_html0/page_html0.dart';
-import 'package:flutterapp2/page_cam0/page_cam0.dart';
+import 'package:flutterapp2/page_ani/page_ani.dart';
 import 'package:flutterapp2/page_bt0/page_bt0.dart';
 import 'package:flutterapp2/page_bt1/page_bt1.dart';
-import 'package:flutterapp2/page_ani/page_ani.dart';
+import 'package:flutterapp2/page_cam0/page_cam0.dart';
+import 'package:flutterapp2/page_html0/page_html0.dart';
+import 'package:flutterapp2/page_tab0/page_tab0.dart';
+
+import 'coffee/coffee_app.dart';
 
 void main() {
   final _osName = Platform.operatingSystem;
@@ -48,7 +50,6 @@ class _MyAppState extends State<MyApp> {
     print("MyApp Called...");
     return MaterialApp(
       title: 'MyApp (invisible)', // used by the OS task switcher
-      initialRoute: MyRoutes.home,
       routes: {
         MyRoutes.home: (context) => HomePage(),
         MyRoutes.page1: (context) => Page1(),
@@ -60,6 +61,7 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.pageBt0: (context) => PageBt0(),
         MyRoutes.pageBt1: (context) => FlutterBluePage(),
         MyRoutes.pageAni0: (context) => PageAni0(),
+        MyRoutes.coffee: (context) => CoffeeApp(),
       },
     );
   }
@@ -76,6 +78,7 @@ class MyRoutes {
   static final String pageBt0 = "/bt0";
   static final String pageBt1 = "/bt1";
   static final String pageAni0 = "/ani0";
+  static final String coffee = "/coffee"
 }
 
 class HomePage extends StatelessWidget {
@@ -103,7 +106,8 @@ class HomePage extends StatelessWidget {
                     MyJumpButton("Camera0", MyRoutes.pageCam0, Colors.lightBlue[200]),
                     MyJumpButton("Bluetooth0", MyRoutes.pageBt0, Colors.lightBlue[300]),
                     MyJumpButton("Bluetooth1", MyRoutes.pageBt1, Colors.lightBlue[300]),
-                    MyJumpButton("Animation0", MyRoutes.pageAni0, Colors.yellow[200])
+                    MyJumpButton("Animation0", MyRoutes.pageAni0, Colors.yellow[200]),
+                    MyJumpButton("Coffee", MyRoutes.coffee, Colors.red[200]),
                   ],
                 )
               )
@@ -116,23 +120,21 @@ class HomePage extends StatelessWidget {
 
 Widget MyHomeDrawer() {
   return Drawer(
-    child: ListView(
-      children: <Widget>[
-        DrawerHeader(
+      child: ListView(
+    children: <Widget>[
+      DrawerHeader(
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: <Color>[
-              Colors.lightBlue[100],
-              Colors.lightBlue[500]
-            ])
-          ),
+              gradient: LinearGradient(colors: <Color>[
+            Colors.lightBlue[100],
+            Colors.lightBlue[500]
+          ])),
           child: Text("")),
-        ListTile(title: Text("line1")),
-        ListTile(title: Text("line2")),
-        ListTile(title: Text("line3")),
-        ListTile(title: Text("line4")),
-      ],
-    )
-  );
+      ListTile(title: Text("line1")),
+      ListTile(title: Text("line2")),
+      ListTile(title: Text("line3")),
+      ListTile(title: Text("line4")),
+    ],
+  ));
 }
 
 class MyJumpButton extends StatelessWidget {
@@ -164,4 +166,3 @@ class MyJumpButton extends StatelessWidget {
     );
   }
 }
-

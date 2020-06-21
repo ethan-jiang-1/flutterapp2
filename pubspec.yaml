@@ -37,6 +37,8 @@ dependencies:
   # flutter_bluetooth_basic: ^0.1.5
   flutter_blue: ^0.7.2
   flurry: 0.0.7
+  get_it: ^4.0.2
+  async: ^2.4.1
 
 dev_dependencies:
   flutter_test:
