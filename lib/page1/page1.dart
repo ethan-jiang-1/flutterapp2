@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutterapp2/page1/mybutton.dart';
-import 'package:flutterapp2/page1/mycounter0.dart';
-import 'package:flutterapp2/page1/mycounter1.dart';
-import 'package:flutterapp2/page1/shoppinglist.dart';
+import 'mybutton.dart';
+import 'mycounter0.dart';
+import 'mycounter1.dart';
+import 'shoppinglist.dart';
 
 class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Material is a conceptual piece of paper on which the UI appears.
     return Scaffold(
-      appBar: AppBar( 
+      appBar: AppBar(
         title: Text("Page1"),
       ),
       body: Center(
-      // Column is a vertical, linear layout.
+        // Column is a vertical, linear layout.
         child: Column(
           children: <Widget>[
             Expanded(
@@ -32,11 +32,13 @@ class Page1 extends StatelessWidget {
               child: MyCounter1(),
             ),
             Expanded(
-              child: ShoppingList(products: <Product>[
-                Product(name: 'Eggs'),
-                Product(name: 'Flour'),
-                Product(name: 'Chocolate chips'),
-              ],),
+              child: ShoppingList(
+                products: <Product>[
+                  Product(name: 'Eggs'),
+                  Product(name: 'Flour'),
+                  Product(name: 'Chocolate chips'),
+                ],
+              ),
             ),
           ],
         ),
@@ -44,4 +46,3 @@ class Page1 extends StatelessWidget {
     );
   }
 }
-
