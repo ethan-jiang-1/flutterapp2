@@ -7,7 +7,7 @@ import 'package:flurry/flurry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterapp2/page1/page1.dart';
-import 'package:flutterapp2/page2/page2.dart';
+import 'package:flutterapp2/counter/page_counter.dart';
 import 'package:flutterapp2/page_ani/page_ani.dart';
 import 'package:flutterapp2/page_bt0/page_bt0.dart';
 import 'package:flutterapp2/page_bt1/page_bt1.dart';
@@ -63,7 +63,6 @@ class _MyAppState extends State<MyApp> {
       routes: {
         MyRoutes.home: (context) => MyHomePage(),
         MyRoutes.page1: (context) => Page1(),
-        MyRoutes.page2: (context) => Page2(),
         MyRoutes.pageTab0: (context) => PageTab0(),
         MyRoutes.pageHtml0: (context) => WebViewExample(),
         MyRoutes.pageCam0: (context) => PageCamera0(),
@@ -71,7 +70,8 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.pageBt1: (context) => FlutterBluePage(),
         MyRoutes.pageAni0: (context) => PageAni0(),
         MyRoutes.coffee: (context) => CoffeeApp(),
-        MyRoutes.ws1: (context) => WeatherSearchPage(),
+        MyRoutes.weatherSearch: (context) => WeatherSearchPage(),
+        MyRoutes.counter: (context) => CounterPage(),
         //MyRoutes.ws2: (context) => WeatherDetailPage(),
       },
     );
@@ -81,7 +81,6 @@ class _MyAppState extends State<MyApp> {
 class MyRoutes {
   static final String home = "/";
   static final String page1 = "/page1";
-  static final String page2 = "/page2";
   static final String pageTab0 = "/tab0";
   static final String pageHtml0 = "/html0";
   static final String pageCam0 = "/cam0";
@@ -89,8 +88,8 @@ class MyRoutes {
   static final String pageBt1 = "/bt1";
   static final String pageAni0 = "/ani0";
   static final String coffee = "/coffee";
-  static final String ws1 = "/ws1";
-  static final String ws2 = "/ws2";
+  static final String counter = "/counter";
+  static final String weatherSearch = "/weatherSearch";
 }
 
 class MyHomePage extends StatelessWidget {
@@ -112,15 +111,15 @@ class MyHomePage extends StatelessWidget {
                   children: <Widget> [
                     SizedBox(height: 10,),
                     MyJumpButton("Page1", MyRoutes.page1, Colors.lightGreen[500]),
-                    MyJumpButton("Page2", MyRoutes.page2, Colors.lightGreen[500],),
                     MyJumpButton("Tab0", MyRoutes.pageTab0, Colors.lightGreen[300]),
                     MyJumpButton("Html0",MyRoutes.pageHtml0, Colors.lightGreen[300]),
                     MyJumpButton("Camera0", MyRoutes.pageCam0, Colors.lightBlue[200]),
                     MyJumpButton("Bluetooth0", MyRoutes.pageBt0, Colors.lightBlue[300]),
                     MyJumpButton("Bluetooth1", MyRoutes.pageBt1, Colors.lightBlue[300]),
                     MyJumpButton("Animation0", MyRoutes.pageAni0, Colors.yellow[200]),
-                    MyJumpButton("Coffee", MyRoutes.coffee, Colors.red[200]),
-                    MyJumpButton("Weather Search", MyRoutes.ws1, Colors.red[200]),
+                    MyJumpButton("Injection: Coffee", MyRoutes.coffee, Colors.red[200]),
+                    MyJumpButton("Bloc: Weather Search", MyRoutes.weatherSearch, Colors.lightGreenAccent[200]),
+                    MyJumpButton("Bloc: Counter", MyRoutes.counter, Colors.lightGreenAccent[200],),
                   ],
                 )
               )

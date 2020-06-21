@@ -1,14 +1,14 @@
 import "package:flutter/material.dart";
-import 'package:flutterapp2/page2/counter_event.dart';
+import 'package:flutterapp2/counter/pure_bloc_counter_event.dart';
 
-import 'count_bloc.dart';
+import 'pure_bloc_counter.dart';
 
-class Page2 extends StatefulWidget {
+class CounterPage extends StatefulWidget {
   @override
-  _Page2State createState() => _Page2State();
+  _CounterPageState createState() => _CounterPageState();
 }
 
-class _Page2State extends State<Page2> {
+class _CounterPageState extends State<CounterPage> {
   final _bloc = CounterBloc();
 
   @override
@@ -17,10 +17,11 @@ class _Page2State extends State<Page2> {
       appBar: AppBar(
         title: Row(
           children: <Widget>[
-            Text("Page2"),
+            Text("CounterPage: simple bloc"),
             Expanded(
               child: StreamBuilder(
                 stream: _bloc.counter,
+                initialData: 0,
                 builder: (contxt, snapshot) {
                   return Text("     ${snapshot.data}");
                 }

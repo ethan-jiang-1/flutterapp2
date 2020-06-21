@@ -14,7 +14,7 @@ class WeatherSearchPage extends StatelessWidget {
     print("weather_search loading");
     return Scaffold(
       appBar: AppBar(
-        title: Text("Weather Search"),
+        title: Text("Weather Search: Bloc cross Pages"),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 16),

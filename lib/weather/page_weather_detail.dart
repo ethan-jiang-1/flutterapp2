@@ -32,7 +32,7 @@ class _WeatherDetailPageState extends State<WeatherDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Weather Detail"),
+        title: Text("Weather Detail: Bloc cross Pages"),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 16),
