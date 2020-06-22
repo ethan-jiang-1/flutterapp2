@@ -43,6 +43,8 @@ class _WeatherDetailPageState extends State<WeatherDetailPage> {
               return buildLoading();
             } else if (state is WeatherLoaded) {
               return buildColumnWithData(context, state.weather);
+            } else {
+              return Container();
             }
           }
         ),      
