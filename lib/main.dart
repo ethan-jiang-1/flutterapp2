@@ -20,6 +20,7 @@ import 'package:flutterapp2/weather/page_weather_search.dart';
 import 'package:flutterapp2/weather/weather_repository.dart';
 
 import 'coffee/coffee_app.dart';
+import 'life_cycle/page_life.dart';
 
 void main() {
   final _osName = Platform.operatingSystem;
@@ -72,6 +73,7 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.coffee: (context) => CoffeeApp(),
         MyRoutes.weatherSearch: (context) => WeatherSearchPage(),
         MyRoutes.counter: (context) => CounterPage(),
+        MyRoutes.lifecycle: (context) => PageLC(),
         //MyRoutes.ws2: (context) => WeatherDetailPage(),
       },
     );
@@ -90,6 +92,7 @@ class MyRoutes {
   static final String coffee = "/coffee";
   static final String counter = "/counter";
   static final String weatherSearch = "/weatherSearch";
+  static final String lifecycle = "/lifeCycle";
 }
 
 class MyHomePage extends StatelessWidget {
@@ -109,17 +112,16 @@ class MyHomePage extends StatelessWidget {
                 controller: _scrollController,
                 child: Column (
                   children: <Widget> [
-                    SizedBox(height: 10,),
-                    MyJumpButton("Page1", MyRoutes.page1, Colors.lightGreen[500]),
+                    MyJumpButton("Page: First", MyRoutes.page1, Colors.lightBlue[200]),
+                    MyJumpButton("Page: Life Cycle", MyRoutes.lifecycle, Colors.lightBlue[200],),
                     MyJumpButton("Tab0", MyRoutes.pageTab0, Colors.lightGreen[300]),
                     MyJumpButton("Html0",MyRoutes.pageHtml0, Colors.lightGreen[300]),
-                    MyJumpButton("Camera0", MyRoutes.pageCam0, Colors.lightBlue[200]),
+                    MyJumpButton("Animation0", MyRoutes.pageAni0, Colors.lightGreen[300]),
+                    MyJumpButton("Camera0", MyRoutes.pageCam0, Colors.lightBlue[300]),
                     MyJumpButton("Bluetooth0", MyRoutes.pageBt0, Colors.lightBlue[300]),
-                    MyJumpButton("Bluetooth1", MyRoutes.pageBt1, Colors.lightBlue[300]),
-                    MyJumpButton("Animation0", MyRoutes.pageAni0, Colors.yellow[200]),
                     MyJumpButton("Injection: Coffee", MyRoutes.coffee, Colors.red[200]),
-                    MyJumpButton("Bloc: Weather Search", MyRoutes.weatherSearch, Colors.lightGreenAccent[200]),
-                    MyJumpButton("Bloc: Counter", MyRoutes.counter, Colors.lightGreenAccent[200],),
+                    MyJumpButton("Bloc: Weather Search", MyRoutes.weatherSearch, Colors.red[200]),
+                    MyJumpButton("Bloc: Counter", MyRoutes.counter, Colors.red[200],),
                   ],
                 )
               )
