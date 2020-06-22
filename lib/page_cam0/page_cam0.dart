@@ -30,21 +30,10 @@ IconData getCameraLensIcon(CameraLensDirection direction) {
 void logError(String code, String message) =>
     print('Error: $code\nError Message: $message');
 
-List<CameraDescription> cameras = [];
-
-void initCamera() async {
-    try {
-      WidgetsFlutterBinding.ensureInitialized();
-      cameras = await availableCameras();
-    } on CameraException catch (e) {
-      logError(e.code, e.description);
-    }    
-}
 
 class CameraExampleHome extends StatefulWidget {
   @override
   _CameraExampleHomeState createState() {
-    initCamera();
     return _CameraExampleHomeState();
   }
 }
@@ -52,12 +41,24 @@ class CameraExampleHome extends StatefulWidget {
 
 
 class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindingObserver {
+  List<CameraDescription> cameras = [];
+
   CameraController controller;
   String imagePath;
   String videoPath;
   VideoPlayerController videoController;
   VoidCallback videoPlayerListener;
   bool enableAudio = true;
+
+  void initCamera() async {
+      try {
+        WidgetsFlutterBinding.ensureInitialized();
+        cameras = await availableCameras();
+      } on CameraException catch (e) {
+        logError(e.code, e.description);
+      }    
+  }
+
 
   @override
   void initState() {
@@ -90,6 +91,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
 
   @override
   Widget build(BuildContext context) {
+    initCamera();
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -278,7 +280,9 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
     final List<Widget> toggles = <Widget>[];
 
     if (cameras.isEmpty) {
-      return const Text('No camera found, Tap title bar to refresh');
+      return const SafeArea(
+          child:Text('No camera found, Tap title bar to refresh'),
+      );
     } else {
       for (CameraDescription cameraDescription in cameras) {
         toggles.add(
