@@ -13,6 +13,7 @@ import 'package:camera/camera.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
+List<CameraDescription> cameras = [];
 
 /// Returns a suitable camera icon for [direction].
 IconData getCameraLensIcon(CameraLensDirection direction) {
@@ -39,8 +40,6 @@ class CameraExampleHome extends StatefulWidget {
 }
 
 class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindingObserver {
-  List<CameraDescription> cameras = [];
-
   CameraController controller;
   String imagePath;
   String videoPath;
@@ -50,32 +49,35 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
 
   void initCamera() async {
       try {
-        WidgetsFlutterBinding.ensureInitialized();
-        cameras = await availableCameras();
-        print("camera inited..." + cameras.isEmpty.toString());
+          if (cameras.isEmpty) {
+            cameras = await availableCameras();
+          }
+        print("camera inited, has camera: " + cameras.isNotEmpty.toString());
       } on CameraException catch (e) {
         logError(e.code, e.description);
         print("camera init failed..." + e.description);
       }    
   }
 
-  void waitCamera() async{
-    for (int i=0; i<10; i++) {
-      await Future.delayed(const Duration(milliseconds: 500));
-      if (cameras.isNotEmpty)
-        break;
-    }
-    print("camera wait result: " + cameras.isNotEmpty.toString());
+  @override
+  void initState() {
+    print("initState");
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding.instance.addObserver(this);
+    initCamera();
   }
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
+  void didChangeDependencies() {
+    print("didChangeDependencies");
+    super.didChangeDependencies();
+    Future.delayed(const Duration(milliseconds: 2000), () => {if (cameras.isNotEmpty) setState(()=>{})});
   }
 
   @override
   void dispose() {
+    print("dipose");
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -99,8 +101,6 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
 
   @override
   Widget build(BuildContext context) {
-    initCamera();
-    waitCamera();
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -510,8 +510,12 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
   }
 }
 
+class PageCamera0 extends StatefulWidget {
+  @override
+  _PageCamera0State createState() => _PageCamera0State();
+}
 
-class PageCamera0 extends StatelessWidget {
+class _PageCamera0State extends State<PageCamera0> {
   @override
   Widget build(BuildContext context) {
     print("PageCamera0 build called...");
