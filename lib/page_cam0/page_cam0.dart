@@ -6,12 +6,15 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:isolate';
 
 import 'package:flutter/material.dart';
 
 import 'package:camera/camera.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
+
+//import 'dart:developer';
 
 List<CameraDescription> cameras = [];
 
@@ -28,8 +31,11 @@ IconData getCameraLensIcon(CameraLensDirection direction) {
   throw ArgumentError('Unknown lens direction');
 }
 
+void logLine(String line) =>
+  print(DateTime.now().millisecondsSinceEpoch.toString() + " " + line);
+
 void logError(String code, String message) =>
-    print('Error: $code\nError Message: $message');
+  logLine('Error: $code\nError Message: $message');
 
 
 class CameraExampleHome extends StatefulWidget {
@@ -49,10 +55,28 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
 
   void initCamera() async {
       try {
-          if (cameras.isEmpty) {
-            cameras = await availableCameras();
-          }
-        print("camera inited, has camera: " + cameras.isNotEmpty.toString());
+        if (cameras.isEmpty) {
+          logLine("await availableCameras");
+          cameras = await availableCameras();
+          logLine("await availableCameras done");
+
+          logLine("await a delay1");
+          final result1 = await Future.value(10).timeout(const Duration(seconds: 1));
+          logLine("await result1: " + result1.toString());
+
+          logLine("await a delay1");
+          final result2 = await Future.any([
+            Future.value(20),
+            Future.delayed(const Duration(seconds: 1))
+          ]);
+          logLine("await result2: " + result2.toString());
+
+          logLine("await a delay3");
+          sleep(const Duration(seconds: 1));
+          logLine("await result3: ");
+
+        }
+        logLine("camera inited, has camera: " + cameras.isNotEmpty.toString());
       } on CameraException catch (e) {
         logError(e.code, e.description);
         print("camera init failed..." + e.description);
@@ -61,7 +85,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
 
   @override
   void initState() {
-    print("initState");
+    logLine("initState");
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     WidgetsBinding.instance.addObserver(this);
@@ -70,9 +94,9 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
 
   @override
   void didChangeDependencies() {
-    print("didChangeDependencies");
+    logLine("didChangeDependencies");
     super.didChangeDependencies();
-    Future.delayed(const Duration(milliseconds: 2000), () => {if (cameras.isNotEmpty) setState(()=>{})});
+    Future.delayed(const Duration(milliseconds: 2000), () => {print("repaint tree"), if (cameras.isNotEmpty) {setState(()=>{})} });
   }
 
   @override
