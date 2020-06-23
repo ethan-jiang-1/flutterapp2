@@ -199,14 +199,12 @@ class CharacteristicTile extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 icon: Icon(
-                  Icons.file_download,
-                  color: Theme.of(context).iconTheme.color.withOpacity(0.5),
+                  Icons.file_download
                 ),
                 onPressed: onReadPressed,
               ),
               IconButton(
-                icon: Icon(Icons.file_upload,
-                    color: Theme.of(context).iconTheme.color.withOpacity(0.5)),
+                icon: Icon(Icons.file_upload),
                 onPressed: onWritePressed,
               ),
               IconButton(
@@ -214,7 +212,7 @@ class CharacteristicTile extends StatelessWidget {
                     characteristic.isNotifying
                         ? Icons.sync_disabled
                         : Icons.sync,
-                    color: Theme.of(context).iconTheme.color.withOpacity(0.5)),
+                  ),
                 onPressed: onNotificationPressed,
               )
             ],
@@ -260,15 +258,13 @@ class DescriptorTile extends StatelessWidget {
         children: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.file_download,
-              color: Theme.of(context).iconTheme.color.withOpacity(0.5),
+              Icons.file_download
             ),
             onPressed: onReadPressed,
           ),
           IconButton(
             icon: Icon(
               Icons.file_upload,
-              color: Theme.of(context).iconTheme.color.withOpacity(0.5),
             ),
             onPressed: onWritePressed,
           )

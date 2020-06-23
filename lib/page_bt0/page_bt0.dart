@@ -8,8 +8,13 @@ import 'package:flutter/material.dart';
 class PageBt0 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Bluetooth scanner',
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Bluetooth 0")
+      ),
+      body: Center(
+        child: Text('Not implemented as pub are conflicted with other'),
+      )
     );
   }
 }

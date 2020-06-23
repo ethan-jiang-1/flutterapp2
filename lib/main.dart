@@ -76,6 +76,7 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.lifecycle: (context) => PageLC(),
         //MyRoutes.ws2: (context) => WeatherDetailPage(),
       },
+      //initialRoute: MyRoutes.home,
     );
   }
 }
@@ -119,6 +120,7 @@ class MyHomePage extends StatelessWidget {
                     MyJumpButton("Animation0", MyRoutes.pageAni0, Colors.lightGreen[300]),
                     MyJumpButton("Camera0", MyRoutes.pageCam0, Colors.lightBlue[300]),
                     MyJumpButton("Bluetooth0", MyRoutes.pageBt0, Colors.lightBlue[300]),
+                    MyJumpButton("Bluetooth1", MyRoutes.pageBt1, Colors.lightBlue[300]),
                     MyJumpButton("Injection: Coffee", MyRoutes.coffee, Colors.red[200]),
                     MyJumpButton("Bloc: Weather Search", MyRoutes.weatherSearch, Colors.red[200]),
                     MyJumpButton("Bloc: Counter", MyRoutes.counter, Colors.red[200],),

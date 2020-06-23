@@ -13,27 +13,26 @@ import 'package:flutterapp2/page_bt1/widgets.dart';
 class FlutterBluePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      color: Colors.lightBlue,
-      home: bluetoothBuilder(),
-    );
-  }
-}
-
-dynamic bluetoothBuilder()  {
-  try {
-    return StreamBuilder<BluetoothState>(
-      stream: FlutterBlue.instance.state,
-      initialData: BluetoothState.unknown,
-      builder: (c, snapshot) {
-        final state = snapshot.data;
-        if (state == BluetoothState.on) {
-          return FindDevicesScreen();
-        }
-        return BluetoothOffScreen(state: state);
-      });
-  } catch(e) {
-    return Text("Exception: $e");
+    try {
+      return StreamBuilder<BluetoothState>(
+        stream: FlutterBlue.instance.state,
+        initialData: BluetoothState.unknown,
+        builder: (c, snapshot) {
+          final state = snapshot.data;
+          if (state == BluetoothState.on) {
+            return FindDevicesScreen();
+          }
+          return BluetoothOffScreen(state: state);
+        });
+    } catch(e) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Bluetooth")
+        ),
+        body: Center(
+          child: Text("Exception: $e")),
+      );
+    }
   }
 }
 
@@ -70,7 +69,7 @@ class FindDevicesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Find Devices'),
+        title: Text('Bluetooth: Find Devices'),
       ),
       body: RefreshIndicator(
         onRefresh: () =>

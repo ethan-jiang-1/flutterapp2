@@ -6,7 +6,6 @@
 
 import 'dart:async';
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:flutter/material.dart';
 
@@ -38,20 +37,39 @@ void logError(String code, String message) =>
   logLine('Error: $code\nError Message: $message');
 
 
-class CameraExampleHome extends StatefulWidget {
+class PageCamera0 extends StatefulWidget {
   @override
-  _CameraExampleHomeState createState() {
-    return _CameraExampleHomeState();
+  _PageCamera0State createState() {
+    return _PageCamera0State();
   }
 }
 
-class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindingObserver {
+class _PageCamera0State extends State<PageCamera0> with WidgetsBindingObserver {
   CameraController controller;
   String imagePath;
   String videoPath;
   VideoPlayerController videoController;
   VoidCallback videoPlayerListener;
   bool enableAudio = true;
+
+  void waitExamAsync() async {
+    logLine("await delay1...");
+    await Future.value(10).timeout(const Duration(seconds: 1));
+    logLine("await delay1 responsed");
+
+    logLine("await delay2...");
+    await Future.any([
+      Future.value(20),
+      Future.delayed(const Duration(seconds: 1), () => logLine("delay2 completed"))
+    ]);
+    logLine("await delay2 responsed");
+  }
+
+  void waitExamSync() {
+    logLine("wait delay3...");
+    sleep(const Duration(seconds: 1));
+    logLine("wait delay3 responsed");
+  }
 
   void initCamera() async {
       try {
@@ -60,21 +78,11 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
           cameras = await availableCameras();
           logLine("await availableCameras done");
 
-          logLine("await a delay1");
-          final result1 = await Future.value(10).timeout(const Duration(seconds: 1));
-          logLine("await result1: " + result1.toString());
-
-          logLine("await a delay1");
-          final result2 = await Future.any([
-            Future.value(20),
-            Future.delayed(const Duration(seconds: 1))
-          ]);
-          logLine("await result2: " + result2.toString());
-
-          logLine("await a delay3");
-          sleep(const Duration(seconds: 1));
-          logLine("await result3: ");
-
+          //wait_exam_async();
+          //wait_exam_sync();
+          setState(() {
+            print("cameras are checked, refresh the widget tree");
+          });
         }
         logLine("camera inited, has camera: " + cameras.isNotEmpty.toString());
       } on CameraException catch (e) {
@@ -96,7 +104,8 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
   void didChangeDependencies() {
     logLine("didChangeDependencies");
     super.didChangeDependencies();
-    Future.delayed(const Duration(milliseconds: 2000), () => {print("repaint tree"), if (cameras.isNotEmpty) {setState(()=>{})} });
+    //if (controller == null)
+    //  Future.delayed(const Duration(milliseconds: 2000), () => {print("repaint tree after 2 seconds"), if (cameras.isNotEmpty) {setState(()=>{})} });
   }
 
   @override
@@ -128,17 +137,18 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: GestureDetector( 
-          onTap: () {
-            print("Tap on tab");
-            setState(() => {});
-          },
-          child: Container(
-            child:Center(
-              child: Text((cameras.isEmpty) ? 'Camera Not Found (tap to find)': 'Camera Found')
-            )
-          )
-        ),
+        title: Text("Camera"),
+        //title: GestureDetector( 
+          //onTap: () {
+          //  print("Tap on tab");
+          //  setState(() => {});
+          //},
+          //child: Container(
+          //  child:Center(
+          //    child: Text((cameras.isEmpty) ? 'Camera Not Found (tap to find)': 'Camera Found')
+          //  )
+          //)
+        //),
       ),
       body: Column(
         children: <Widget>[
@@ -181,14 +191,18 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
   /// Display the preview from the camera (or a message if the preview is not available).
   Widget _cameraPreviewWidget() {
     if (controller == null || !controller.value.isInitialized) {
-      return Text(
-        (cameras.isEmpty)? 'No camera found': 'select a camera below',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 24.0,
-          fontWeight: FontWeight.w900,
-        ),
-      );
+      if (cameras.isNotEmpty) {
+        return Text(
+          'select a camera below',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24.0,
+            fontWeight: FontWeight.w900,
+          ),
+        );
+      } else {
+        return CircularProgressIndicator();
+      }
     } else {
       return AspectRatio(
         aspectRatio: controller.value.aspectRatio,
@@ -533,19 +547,3 @@ class _CameraExampleHomeState extends State<CameraExampleHome> with WidgetsBindi
     showInSnackBar('Error: ${e.code}\n${e.description}');
   }
 }
-
-class PageCamera0 extends StatefulWidget {
-  @override
-  _PageCamera0State createState() => _PageCamera0State();
-}
-
-class _PageCamera0State extends State<PageCamera0> {
-  @override
-  Widget build(BuildContext context) {
-    print("PageCamera0 build called...");
-    return MaterialApp(
-      home: CameraExampleHome(),
-    );
-  }
-}
-
