@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:flurry/flurry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterapp2/adobe_xd/adobe_xd0.dart';
 import 'package:flutterapp2/page1/page1.dart';
 import 'package:flutterapp2/counter/page_counter.dart';
 import 'package:flutterapp2/page_ani/page_ani.dart';
@@ -74,6 +75,8 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.weatherSearch: (context) => WeatherSearchPage(),
         MyRoutes.counter: (context) => CounterPage(),
         MyRoutes.lifecycle: (context) => PageLC(),
+        MyRoutes.adobe_xd0: (context) => IPhoneXXS11Pro1(),
+
         //MyRoutes.ws2: (context) => WeatherDetailPage(),
       },
       //initialRoute: MyRoutes.home,
@@ -94,6 +97,7 @@ class MyRoutes {
   static final String counter = "/counter";
   static final String weatherSearch = "/weatherSearch";
   static final String lifecycle = "/lifeCycle";
+  static final String adobe_xd0 = "/adobe_xd0";
 }
 
 class MyHomePage extends StatelessWidget {
@@ -124,6 +128,7 @@ class MyHomePage extends StatelessWidget {
                     MyJumpButton("Injection: Coffee", MyRoutes.coffee, Colors.red[200]),
                     MyJumpButton("Bloc: Weather Search", MyRoutes.weatherSearch, Colors.red[200]),
                     MyJumpButton("Bloc: Counter", MyRoutes.counter, Colors.red[200],),
+                    MyJumpButton("Adobe: XD0", MyRoutes.adobe_xd0, Colors.yellow[200],),
                   ],
                 )
               )
