@@ -1,14 +1,14 @@
 import "package:flutter/material.dart";
-import 'package:flutterapp2/counter/pure_bloc_counter_event.dart';
+import 'package:flutterapp2/bloc_counter/pure_bloc_counter_event.dart';
 
 import 'pure_bloc_counter.dart';
 
-class CounterPage extends StatefulWidget {
+class BlocCounterPage extends StatefulWidget {
   @override
-  _CounterPageState createState() => _CounterPageState();
+  _BlocCounterPageState createState() => _BlocCounterPageState();
 }
 
-class _CounterPageState extends State<CounterPage> {
+class _BlocCounterPageState extends State<BlocCounterPage> {
   final _bloc = CounterBloc();
   final _key = GlobalKey<ScaffoldState>();
 
@@ -16,7 +16,7 @@ class _CounterPageState extends State<CounterPage> {
   void initState() {
     super.initState();
     _bloc.conterEventSink.add(ResetEvent());
-    print("CP: CounterPageState initState");
+    print("CP: BlocCounterPageState initState");
   }
 
   void bringSnackBar(String msg) {
@@ -30,7 +30,7 @@ class _CounterPageState extends State<CounterPage> {
       appBar: AppBar(
         title: Row(
           children: <Widget>[
-            Text("CounterPage: simple bloc"),
+            Text("BlocCounterPage: simple bloc"),
             Expanded(
               child: StreamBuilder(
                 stream: _bloc.counter,

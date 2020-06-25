@@ -8,20 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterapp2/adobe_xd/adobe_xd0.dart';
 import 'package:flutterapp2/page1/page1.dart';
-import 'package:flutterapp2/counter/page_counter.dart';
+import 'package:flutterapp2/bloc_counter/bloc_page_counter.dart';
 import 'package:flutterapp2/page_ani/page_ani.dart';
 import 'package:flutterapp2/page_bt0/page_bt0.dart';
 import 'package:flutterapp2/page_bt1/page_bt1.dart';
 import 'package:flutterapp2/page_cam0/page_cam0.dart';
 import 'package:flutterapp2/page_html0/page_html0.dart';
 import 'package:flutterapp2/page_tab0/page_tab0.dart';
-import 'package:flutterapp2/weather/bloc/weather_bloc.dart';
-//import 'package:flutterapp2/weather/page_weather_detail.dart';
-import 'package:flutterapp2/weather/page_weather_search.dart';
-import 'package:flutterapp2/weather/weather_repository.dart';
-
+import 'package:flutterapp2/bloc_weather/bloc/weather_bloc.dart';
+import 'package:flutterapp2/bloc_weather/page_weather_search.dart';
+import 'package:flutterapp2/bloc_weather/weather_repository.dart';
 import 'coffee/coffee_app.dart';
 import 'life_cycle/page_life.dart';
+import 'provider_counter/pvd_page_counter_a.dart';
+import 'provider_counter/pvd_page_counter_b.dart';
 
 void main() {
   final _osName = Platform.operatingSystem;
@@ -73,9 +73,11 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.pageAni0: (context) => PageAni0(),
         MyRoutes.coffee: (context) => CoffeeApp(),
         MyRoutes.weatherSearch: (context) => WeatherSearchPage(),
-        MyRoutes.counter: (context) => CounterPage(),
+        MyRoutes.blocCounter: (context) => BlocCounterPage(),
         MyRoutes.lifecycle: (context) => PageLC(),
-        MyRoutes.adobe_xd0: (context) => IPhoneXXS11Pro1(),
+        MyRoutes.adobeXd0: (context) => IPhoneXXS11Pro1(),
+        MyRoutes.pvdCounterA: (context) => PvdCounterPageA(),
+        MyRoutes.pvdCounterB: (context) => PvdCounterPageB(),
 
         //MyRoutes.ws2: (context) => WeatherDetailPage(),
       },
@@ -94,10 +96,12 @@ class MyRoutes {
   static final String pageBt1 = "/bt1";
   static final String pageAni0 = "/ani0";
   static final String coffee = "/coffee";
-  static final String counter = "/counter";
+  static final String blocCounter = "/counter";
   static final String weatherSearch = "/weatherSearch";
   static final String lifecycle = "/lifeCycle";
-  static final String adobe_xd0 = "/adobe_xd0";
+  static final String adobeXd0 = "/adobe_xd0";
+  static final String pvdCounterA = "/pvd_counter_a";
+  static final String pvdCounterB = "/pvd_counter_b";
 }
 
 class MyHomePage extends StatelessWidget {
@@ -127,8 +131,10 @@ class MyHomePage extends StatelessWidget {
                     MyJumpButton("Bluetooth1", MyRoutes.pageBt1, Colors.lightBlue[300]),
                     MyJumpButton("Injection: Coffee", MyRoutes.coffee, Colors.red[200]),
                     MyJumpButton("Bloc: Weather Search", MyRoutes.weatherSearch, Colors.red[200]),
-                    MyJumpButton("Bloc: Counter", MyRoutes.counter, Colors.red[200],),
-                    MyJumpButton("Adobe: XD0", MyRoutes.adobe_xd0, Colors.yellow[200],),
+                    MyJumpButton("Bloc: Counter", MyRoutes.blocCounter, Colors.red[200],),
+                    MyJumpButton("Provider: Counter A", MyRoutes.pvdCounterA, Colors.red[200],),
+                    MyJumpButton("Provider: Counter B", MyRoutes.pvdCounterB, Colors.red[200],),
+                    MyJumpButton("Adobe: XD0", MyRoutes.adobeXd0, Colors.yellow[200],),
                   ],
                 )
               )

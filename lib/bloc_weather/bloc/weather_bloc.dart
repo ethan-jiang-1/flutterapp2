@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 //import 'package:equatable/equatable.dart';
-import 'package:flutterapp2/weather/weather_repository.dart';
+import 'package:flutterapp2/bloc_weather/weather_repository.dart';
 
 import 'weather_state.dart';
 import 'weather_event.dart';
