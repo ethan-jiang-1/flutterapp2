@@ -17,14 +17,17 @@ class _CounterPageState extends State<CounterPage> {
     super.initState();
     _bloc.conterEventSink.add(ResetEvent());
     print("CP: CounterPageState initState");
+  }
 
+  void bringSnackBar(String msg) {
+    _key.currentState.showSnackBar(SnackBar(content: Text(msg), duration: Duration(seconds: 1)));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       appBar: AppBar(
-        key: _key,
         title: Row(
           children: <Widget>[
             Text("CounterPage: simple bloc"),
@@ -66,7 +69,7 @@ class _CounterPageState extends State<CounterPage> {
         children: <Widget>[
           FloatingActionButton(
             heroTag: "btn1",
-            onPressed: () => _bloc.conterEventSink.add(IncrementEvent()),
+            onPressed: () => { _bloc.conterEventSink.add(IncrementEvent()),  bringSnackBar("IncrementEvent") },
             tooltip: 'Increment',
             child: Icon(Icons.add),
           ),
@@ -77,7 +80,7 @@ class _CounterPageState extends State<CounterPage> {
               if ((snapshot.data is num) && (snapshot.data > 0)) {
                 return FloatingActionButton(
                   heroTag: "btn2",
-                  onPressed: ()=> _bloc.conterEventSink.add(DecrementEvent()),
+                  onPressed: ()=> {_bloc.conterEventSink.add(DecrementEvent()), bringSnackBar("DecrementEvent")},
                   tooltip: 'Decrement',
                   child: Icon(Icons.remove),
                 );
@@ -92,7 +95,7 @@ class _CounterPageState extends State<CounterPage> {
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               return FloatingActionButton(
                 heroTag: "btn2",
-                onPressed: ()=> _bloc.conterEventSink.add(RefreshEvent()),
+                onPressed: ()=> {_bloc.conterEventSink.add(RefreshEvent()), bringSnackBar("RefreshEvent") },
                 tooltip: 'Refresh',
                 child: Icon(Icons.refresh),
               );
