@@ -20,10 +20,18 @@ class CounterBloc {
   } 
 
   void _mapEventToState(CounterEvent event) {
-    if (event is IncrementEvent)
+    if (event is IncrementEvent) {
+      print("IncreaseEvent");
       _counter++;
-    else
+    } else if (event is DecrementEvent) {
+      print("DecreaseEvent");
       _counter--;
+    } else if (event is ResetEvent) {
+      print("ResetEvent");
+      _counter = 0;
+    } else if (event is RefreshEvent) {
+      print("RefreshEvent");
+    }
     
     _inCounter.add(_counter);
   }
