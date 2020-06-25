@@ -32,10 +32,16 @@ class WebViewExample extends StatefulWidget {
 class _WebViewExampleState extends State<WebViewExample> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
+  final _key = GlobalKey<ScaffoldState>();
+
+  void bringSnackBar(String msg) {
+    _key.currentState.showSnackBar(SnackBar(content: Text(msg), duration: Duration(seconds: 1)));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         title: const Text('Flutter WebView example'),
         // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
@@ -49,17 +55,18 @@ class _WebViewExampleState extends State<WebViewExample> {
       body: Builder(builder: (BuildContext context) {
         return WebView(
           //initialUrl: 'https://flutter.dev',
-          initialUrl: 'https://www.gululu.com',
+          initialUrl: 'https://www.bing.com',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);
+            bringSnackBar("onWebViewCreated");
           },
           // ignore: prefer_collection_literals
           javascriptChannels: <JavascriptChannel>[
             _toasterJavascriptChannel(context),
           ].toSet(),
           navigationDelegate: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
+            if (request.url.startsWith('https://www.gululu.com/')) {
               print('blocking navigation to $request}');
               return NavigationDecision.prevent;
             }
@@ -68,9 +75,11 @@ class _WebViewExampleState extends State<WebViewExample> {
           },
           onPageStarted: (String url) {
             print('Page started loading: $url');
+            bringSnackBar("onPageStarted");
           },
           onPageFinished: (String url) {
             print('Page finished loading: $url');
+            bringSnackBar("onPageFinished");
           },
           gestureNavigationEnabled: true,
         );
