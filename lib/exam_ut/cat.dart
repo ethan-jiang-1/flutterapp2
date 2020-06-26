@@ -1,20 +1,26 @@
 // Real class
 class Cat {
   int _lives = 9;
+  List<String> _foodEaten = List<String>();
 
   int get lives => _lives;
   void set lives (_) => {_lives = _};
+  List<String> get foodEaten => _foodEaten;
 
   String sound() {
      return "Meow";
   }
-  bool eatFood(String food, {bool hungry}) {
+  bool eatFood(String food, {bool hungry=false}) {
     if (food == "Nothing")
       return false;
-    if (food == "Fish")
+    if (food == "Fish") {
+      _foodEaten.add(food);
       return true;
-    if ((food == "Milke") && (hungry))
+    }
+    if ((food == "Milk") && (hungry)) {
+      _foodEaten.add(food);
       return true;
+    }
     return false;
   } 
 

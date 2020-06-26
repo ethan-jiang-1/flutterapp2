@@ -99,13 +99,4 @@ void main() {
     when(cat.eatFood(any, hungry: captureAnyNamed('hungry'))).thenReturn(false);
     when(cat.eatFood(any, hungry: captureThat(isNotNull, named: 'hungry'))).thenReturn(true);
   });
-
-
-  test('Cat mock named argument', () async {
-    var cat = MockCat();
-    when(cat.eatFood(any, hungry: anyNamed('hungry'))).thenReturn(true);
-    when(cat.eatFood(any, hungry: argThat(isNotNull, named: 'hungry'))).thenReturn(false);
-    when(cat.eatFood(any, hungry: captureAnyNamed('hungry'))).thenReturn(false);
-    when(cat.eatFood(any, hungry: captureThat(isNotNull, named: 'hungry'))).thenReturn(true);
-  });
 }

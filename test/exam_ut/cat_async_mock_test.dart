@@ -5,14 +5,6 @@ import 'package:mockito/mockito.dart';
 
 class MockCat extends Mock implements Cat {}
 void main() {
-  test('Cat HuntGame Real', () async {
-    var rcat = Cat();
-
-    var hg1 = HuntGame(rcat);
-    hg1.play1("S1");
-    hg1.play1("S2");
-  });
-    
   test('Cat HuntGame Mock', () async {
     var mcat = MockCat();
     when(mcat.eatFood(any)).thenReturn(false);
