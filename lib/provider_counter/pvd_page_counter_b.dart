@@ -38,8 +38,8 @@ class PvdCounterPageBState extends State<PvdCounterPageB> {
                     //获取数据
                       'Text1 : ${data.toString()}',
                       style: TextStyle(fontSize: 20));
-                }, selector:
-                (BuildContext context, CounterProvider counterProvider) {
+                }, 
+                selector: (BuildContext context, CounterProvider counterProvider) {
                   //这个地方返回具体的值，对应builder中的data
                   return counterProvider.value0;
                 }
@@ -53,8 +53,7 @@ class PvdCounterPageBState extends State<PvdCounterPageB> {
                     style: TextStyle(fontSize: 20),
                   );
                 },
-                selector: (BuildContext context,
-                    CounterProvider counterProvider) {
+                selector: (BuildContext context, CounterProvider counterProvider) {
                   return counterProvider.value1;
                 }
             ),
