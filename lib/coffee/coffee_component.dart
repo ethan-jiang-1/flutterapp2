@@ -12,23 +12,22 @@ class CoffeeComponent {
   CoffeeComponent() : _getIt = GetIt.asNewInstance();
 
   void init() {
+
+    print("register all injections now...");
     _getIt.registerFactory<PowerOutlet>(() => PowerOutlet());
-    _getIt.registerFactory<Electricity>(
-        () => Electricity(_getIt.get<PowerOutlet>()));
+    _getIt.registerFactory<Electricity>(() => Electricity(_getIt.get<PowerOutlet>()));
 
     _getIt.registerSingleton<Heater>(ElectricHeater(_getIt.get<Electricity>()));
     _getIt.registerSingleton<Pump>(Thermosiphon(_getIt.get<Heater>()));
-    _getIt.registerSingleton<String>("Coffee by Dart Inc.",
-        instanceName: "brandName");
-    _getIt.registerSingleton<String>("DripCoffeeStandard",
-        instanceName: "modelName");
+
+    _getIt.registerSingleton<String>("Coffee by Dart Inc.",  instanceName: "brandName");
+    _getIt.registerSingleton<String>("DripCoffeeStandard", instanceName: "modelName");
 
     Heater heater = _getIt.get<Heater>();
     Pump pump = _getIt.get<Pump>();
     String brand = _getIt.get<String>(instanceName: "brandName");
     String model = _getIt.get<String>(instanceName: "modelName");
-    _getIt.registerSingleton<CoffeeMaker>(
-        CoffeeMaker(heater, pump, brand, model));
+    _getIt.registerSingleton<CoffeeMaker>(CoffeeMaker(heater, pump, brand, model));
   }
 
   void deInit() {

@@ -20,7 +20,9 @@ class CoffeeMaker {
 
     _count++;
     StringBuffer buffer = StringBuffer();
-    buffer..writeln("no.$_count")..writeln("wait heater on... ");
+    buffer
+      ..writeln("no.$_count")
+      ..writeln("wait heater on... ");
     callback(buffer.toString());
 
     buffer
@@ -31,7 +33,9 @@ class CoffeeMaker {
 
     await Future.delayed(Duration(milliseconds: 3000));
 
-    buffer..writeln("down!")..writeln(" Thanks for using $_model by $_brand");
+    buffer
+      ..writeln("down!")
+      ..writeln(" Thanks for using $_model by $_brand");
 
     callback(buffer.toString());
 

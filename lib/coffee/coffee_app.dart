@@ -13,42 +13,66 @@ class _CoffeeAppState extends State<StatefulWidget> {
   CoffeeComponent _coffeeComponent;
   CoffeeMaker _coffeeMaker;
 
-  String text;
+  String _text;
 
   CancelableOperation cancelableOperation;
 
   @override
   void initState() {
+    print("initState");
     super.initState();
     _coffeeComponent = CoffeeComponent();
     _coffeeComponent.init();
     _coffeeMaker = _coffeeComponent.getCoffeeMaker();
-    text = "A cup of Java?";
+    _text = "A cup of Java?";
+  }
+
+  @override 
+  void didChangeDependencies()  {
+    print("didChangeDependecies");
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("build");
     return Scaffold(
       appBar: AppBar(
         title: Text("Coffee App"),
       ),
-      body: Center(
-        child: Text(text, textAlign: TextAlign.center),
+      body: Column(
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(3.0),
+            decoration: BoxDecoration(border: Border.all(color:Colors.blue[300])),
+            child: Center(
+              child: Text(_text, textAlign: TextAlign.center),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Text("brew"),
         onPressed: () {
           cancelableOperation = CancelableOperation.fromFuture(
-              _coffeeMaker.brew((text) => setState(() => this.text = text)));
+              _coffeeMaker.brew((text) => setState(() => this._text = text)));
         },
-      ),
+      ), 
     );
+  }
+
+  @override
+  void deactivate() {
+    print("deactive");
+    cancelableOperation?.cancel();
+    super.deactivate();
   }
 
   @override
   void dispose() {
     print("dispose!");
-    cancelableOperation?.cancel();
+    //cancelableOperation?.cancel();
     _coffeeComponent.deInit();
     super.dispose();
   }
