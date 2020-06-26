@@ -10,8 +10,11 @@ void main() {
     var hg1 = HuntGame(rcat);
     hg1.play1("S1");
     hg1.play1("S2");
+
+    //there are still tasks waiting here, no idea how to flush out 
     print(rcat.foodEaten);
 
+    
   });
 
   test('Cat HuntGame Real (FakeAync)', () {
@@ -22,7 +25,7 @@ void main() {
       hg1.play1("S1F");
       hg1.play1("S2F");
 
-      //There still tasks waiting to flush
+      //There still tasks waiting to flush, we can flush now as we have fake async
       async.flushMicrotasks();
       print(rcat.foodEaten);
     });

@@ -118,6 +118,5 @@ class CityInputField extends StatelessWidget {
     // Initiate getting the weather
     weatherBloc.add(GetWeather(cityName));
     //weatherBloc.close();
-
   }
 }

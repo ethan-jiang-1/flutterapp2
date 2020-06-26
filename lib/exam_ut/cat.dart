@@ -4,7 +4,7 @@ class Cat {
   List<String> _foodEaten = List<String>();
 
   int get lives => _lives;
-  void set lives (_) => {_lives = _};
+  set lives (_) => {_lives = _};
   List<String> get foodEaten => _foodEaten;
 
   String sound() {
@@ -67,19 +67,19 @@ class HuntGame{
 
     HuntGame(this._cat);
 
-    void play1(pls_name) async {
-        final Places _places = Places(pls_name);
-        print("$pls_name started...\n");
+    void play1(String plsName) async {
+        final Places _places = Places(plsName);
+        print("$plsName started...\n");
 
         List<String> pls = _places.places();
         for (String pl in pls) {
           String food = _places.food(pl);
-          print("$pls_name in place: $pl now, found: $food");
+          print("$plsName in place: $pl now, found: $food");
           if (_cat.eatFood(food)) {
             await _cat.chew(food:food);
           }
         }
-        print("$pls_name ended.\n");
+        print("$plsName ended.\n");
     }
 
 }
