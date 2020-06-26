@@ -13,8 +13,12 @@ void main() {
 
      _eb.listen((x) {print("listen: " + x.toString()); _lstStates.add(x.toString());});
      _eb.add(GetWeather("shanghai"));
+     //_eb.add(GetWeather("shanghai"));
+    //_eb.add(GetDetailedWeather("shanghai"));
+    //_eb.add(GetDetailedWeather("shanghai"));
 
     print("before fluash: " + _lstStates.toString());
+    async.elapse(Duration(seconds: 2));
     async.flushMicrotasks();
     print("after fluash: " + _lstStates.toString());
 
