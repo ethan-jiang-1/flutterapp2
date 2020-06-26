@@ -9,5 +9,11 @@
             "request": "launch",
             "type": "dart"
         }
+        {
+            "name": "All Tests",
+            "type": "dart",
+            "request": "launch",
+            "program": "tests/", // or test/foo for a subset of tests
+        }        
     ]
 }
