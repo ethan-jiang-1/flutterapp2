@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutterapp2/exam_ut/counter.dart';
 
 void main() {
-  test('Counter value should be incremented', () {
+  test('Counter value should be incremented0', () {
     final counter = Counter();
 
     counter.increment();
@@ -15,6 +15,6 @@ void main() {
 
     counter.increment();
 
-    expect(counter.value, 2);
+    expect(counter.value, 1);
   });
 }
