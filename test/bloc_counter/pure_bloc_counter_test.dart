@@ -4,16 +4,21 @@ import 'package:flutterapp2/bloc_counter/pure_bloc_counter.dart';
 import 'package:flutterapp2/bloc_counter/pure_bloc_counter_event.dart';
 
 void main() {
-  test('Counter Bloc response to ResetEvent', () {
+  test('Counter Bloc response to ResetEvent', () async {
     final _bloc = CounterBloc();
+    int _result = -1;
+    _bloc.counter.listen((x) => {_result=x, print("get notification0: "+x.toString())});
 
     _bloc.conterEventSink.add(ResetEvent());
-    _bloc.counter.listen((x) => {print("listen0: " + x.toString())});
+
+    //print("check result: " + _result.toString());
+    //expectLater(_result, emits(0));
+
   });
   test('Counter Bloc response to IncrementEvent', () {
     final _bloc = CounterBloc();
     int _result = -1;
-    _bloc.counter.listen((x) => {_result=x, print("get notification: "+x.toString())});
+    _bloc.counter.listen((x) => {_result=x, print("get notification1: "+x.toString())});
 
     _bloc.conterEventSink.add(ResetEvent());
     print("result1: " + _result.toString());
