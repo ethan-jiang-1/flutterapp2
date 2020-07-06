@@ -14,6 +14,7 @@ import 'package:flutterapp2/page_bt0/page_bt0.dart';
 import 'package:flutterapp2/page_bt1/page_bt1.dart';
 import 'package:flutterapp2/page_cam0/page_cam0.dart';
 import 'package:flutterapp2/page_html0/page_html0.dart';
+import 'package:flutterapp2/page_rx/page_rx.dart';
 import 'package:flutterapp2/page_tab0/page_tab0.dart';
 import 'package:flutterapp2/bloc_weather/bloc/weather_bloc.dart';
 import 'package:flutterapp2/bloc_weather/page_weather_search.dart';
@@ -27,12 +28,10 @@ import 'provider_counter/pvd_page_counter_b.dart';
 void main() {
   final _osName = Platform.operatingSystem;
   print("main started $_osName ....");
-  runApp(
-      BlocProvider(
-        create: (context) => WeatherBloc(FakeWatherRepository()),
-        child: MyApp(),
-      )
-  );
+  runApp(BlocProvider(
+    create: (context) => WeatherBloc(FakeWatherRepository()),
+    child: MyApp(),
+  ));
   print("main ended");
 }
 
@@ -79,7 +78,7 @@ class _MyAppState extends State<MyApp> {
         MyRoutes.adobeXd0: (context) => IPhoneXXS11Pro1(),
         MyRoutes.pvdCounterA: (context) => PvdCounterPageA(),
         MyRoutes.pvdCounterB: (context) => PvdCounterPageB(),
-
+        MyRoutes.prxdart: (context) => PageRxDart0(),
         //MyRoutes.ws2: (context) => WeatherDetailPage(),
       },
       //initialRoute: MyRoutes.home,
@@ -103,6 +102,7 @@ class MyRoutes {
   static final String adobeXd0 = "/adobe_xd0";
   static final String pvdCounterA = "/pvd_counter_a";
   static final String pvdCounterB = "/pvd_counter_b";
+  static final String prxdart = "/prxdart";
 }
 
 class MyHomePage extends StatelessWidget {
@@ -110,38 +110,69 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("MyHomePage： Home"),
-          backgroundColor: Colors.blue,
-        ),
-        body: Center(
-            child: Scrollbar(
+      appBar: AppBar(
+        title: Text("MyHomePage： Home"),
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+          child: Scrollbar(
               isAlwaysShown: true,
               controller: _scrollController,
               child: SingleChildScrollView(
-                controller: _scrollController,
-                child: Column (
-                  children: <Widget> [
-                    MyJumpButton("Page: First", MyRoutes.page1, Colors.lightBlue[200]),
-                    MyJumpButton("Page: Life Cycle", MyRoutes.lifecycle, Colors.lightBlue[200],),
-                    MyJumpButton("Tab0", MyRoutes.pageTab0, Colors.lightGreen[300]),
-                    MyJumpButton("Html0",MyRoutes.pageHtml0, Colors.lightGreen[300]),
-                    MyJumpButton("Animation0", MyRoutes.pageAni0, Colors.lightGreen[300]),
-                    MyJumpButton("Camera0", MyRoutes.pageCam0, Colors.lightBlue[300]),
-                    MyJumpButton("Bluetooth0", MyRoutes.pageBt0, Colors.lightBlue[300]),
-                    MyJumpButton("Bluetooth1", MyRoutes.pageBt1, Colors.lightBlue[300]),
-                    MyJumpButton("Injection: Coffee", MyRoutes.coffee, Colors.red[200]),
-                    MyJumpButton("Bloc: Weather Search", MyRoutes.weatherSearch, Colors.red[200]),
-                    MyJumpButton("Bloc: Counter", MyRoutes.blocCounter, Colors.red[200],),
-                    MyJumpButton("Provider: Counter A", MyRoutes.pvdCounterA, Colors.red[200],),
-                    MyJumpButton("Provider: Counter B", MyRoutes.pvdCounterB, Colors.red[200],),
-                    MyJumpButton("Adobe: XD0", MyRoutes.adobeXd0, Colors.yellow[200],),
-                  ],
-                )
-              )
-            )
-          ),
-        drawer: MyDrawer(),
+                  controller: _scrollController,
+                  child: Column(
+                    children: <Widget>[
+                      MyJumpButton(
+                          "Page: First", MyRoutes.page1, Colors.lightBlue[200]),
+                      MyJumpButton(
+                        "Page: Life Cycle",
+                        MyRoutes.lifecycle,
+                        Colors.lightBlue[200],
+                      ),
+                      MyJumpButton(
+                          "Tab0", MyRoutes.pageTab0, Colors.lightGreen[300]),
+                      MyJumpButton(
+                          "Html0", MyRoutes.pageHtml0, Colors.lightGreen[300]),
+                      MyJumpButton("Animation0", MyRoutes.pageAni0,
+                          Colors.lightGreen[300]),
+                      MyJumpButton(
+                          "Camera0", MyRoutes.pageCam0, Colors.lightBlue[300]),
+                      MyJumpButton("Bluetooth0", MyRoutes.pageBt0,
+                          Colors.lightBlue[300]),
+                      MyJumpButton("Bluetooth1", MyRoutes.pageBt1,
+                          Colors.lightBlue[300]),
+                      MyJumpButton("Injection: Coffee", MyRoutes.coffee,
+                          Colors.red[200]),
+                      MyJumpButton("Bloc: Weather Search",
+                          MyRoutes.weatherSearch, Colors.red[200]),
+                      MyJumpButton(
+                        "Bloc: Counter",
+                        MyRoutes.blocCounter,
+                        Colors.red[200],
+                      ),
+                      MyJumpButton(
+                        "Provider: Counter A",
+                        MyRoutes.pvdCounterA,
+                        Colors.red[200],
+                      ),
+                      MyJumpButton(
+                        "Provider: Counter B",
+                        MyRoutes.pvdCounterB,
+                        Colors.red[200],
+                      ),
+                      MyJumpButton(
+                        "Adobe: XD0",
+                        MyRoutes.adobeXd0,
+                        Colors.yellow[200],
+                      ),
+                      MyJumpButton(
+                        "RxDart: Test",
+                        MyRoutes.prxdart,
+                        Colors.yellow[200],
+                      ),
+                    ],
+                  )))),
+      drawer: MyDrawer(),
     );
   }
 }
@@ -159,10 +190,16 @@ class MyDrawer extends StatelessWidget {
               Colors.lightBlue[500]
             ])),
             child: Text("")),
-        ListTile(title: Text("Camera"), 
-                onTap: () {Navigator.pushNamed(context, MyRoutes.pageCam0);}),
-        ListTile(title: Text("Bluetooth"),
-                onTap:  () {Navigator.pushNamed(context, MyRoutes.pageBt1);}),
+        ListTile(
+            title: Text("Camera"),
+            onTap: () {
+              Navigator.pushNamed(context, MyRoutes.pageCam0);
+            }),
+        ListTile(
+            title: Text("Bluetooth"),
+            onTap: () {
+              Navigator.pushNamed(context, MyRoutes.pageBt1);
+            }),
         ListTile(title: Text("line3")),
         ListTile(title: Text("line4")),
       ],
@@ -175,7 +212,7 @@ class MyJumpButton extends StatelessWidget {
   final Color _color;
   final String _route;
 
-  MyJumpButton(this._name, this._route,  this._color);
+  MyJumpButton(this._name, this._route, this._color);
 
   @override
   Widget build(BuildContext context) {
